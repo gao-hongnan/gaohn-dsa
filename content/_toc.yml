@@ -4,9 +4,11 @@
 format: jb-book
 root: intro.md
 parts:
-  - caption: Chapter 1. Mathematical Preliminaries
+  - caption: Stack
     chapters:
       - file: stack/Stack.ipynb
+  - caption: Queue
+    chapters:
       - file: queue/Queue.ipynb
 
 
