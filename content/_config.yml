@@ -19,6 +19,7 @@ execute:
 
 # MyST Configuration
 # myst_heading_anchors: 2
+nb_number_source_lines: true
 
 # Define the name of the latex output file for PDF builds
 latex:

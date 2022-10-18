@@ -7,8 +7,11 @@ parts:
   - caption: Stack
     chapters:
       - file: stack/Stack.ipynb
+      - file: stack/Questions.ipynb
   - caption: Queue
     chapters:
       - file: queue/Queue.ipynb
+      - file: queue/DeQueue.ipynb
+      - file: queue/Questions.ipynb
 
 
