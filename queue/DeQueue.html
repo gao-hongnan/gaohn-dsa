@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Queue &#8212; Data Structures &amp; Algorithms</title>
+    <title>Double Ended Queue &#8212; Data Structures &amp; Algorithms</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Double Ended Queue" href="DeQueue.html" />
-    <link rel="prev" title="Questions" href="../stack/Questions.html" />
+    <link rel="next" title="Questions" href="Questions.html" />
+    <link rel="prev" title="Queue" href="Queue.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -141,13 +141,13 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Queue.html">
    Queue
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="DeQueue.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Double Ended Queue
   </a>
  </li>
@@ -215,7 +215,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/gao-hongnan/gaohn-dsa/main?urlpath=tree/content/queue/Queue.ipynb"
+        <a href="https://mybinder.org/v2/gh/gao-hongnan/gaohn-dsa/main?urlpath=tree/content/queue/DeQueue.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -233,7 +233,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/gao-hongnan/gaohn-dsa/blob/main/content/queue/Queue.ipynb"
+        <a href="https://colab.research.google.com/github/gao-hongnan/gaohn-dsa/blob/main/content/queue/DeQueue.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -293,7 +293,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/gao-hongnan/gaohn-dsa/issues/new?title=Issue%20on%20page%20%2Fqueue/Queue.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/gao-hongnan/gaohn-dsa/issues/new?title=Issue%20on%20page%20%2Fqueue/DeQueue.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -321,7 +321,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/queue/Queue.ipynb"
+        <a href="../_sources/queue/DeQueue.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -416,7 +416,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Queue</h1>
+                <h1>Double Ended Queue</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -464,21 +464,14 @@ title="Print to PDF"
               <div>
                 
   <p><a class="reference external" href="https://colab.research.google.com/github/reighns92/reighns-ml-blog/blob/master/docs/reighns_ml_journey/data_structures_and_algorithms/Stack.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
-<section class="tex2jax_ignore mathjax_ignore" id="queue">
-<h1>Queue<a class="headerlink" href="#queue" title="Permalink to this headline">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="double-ended-queue">
+<h1>Double Ended Queue<a class="headerlink" href="#double-ended-queue" title="Permalink to this headline">#</a></h1>
 <section id="the-queue-abstract-data-type">
 <h2>The Queue Abstract Data Type<a class="headerlink" href="#the-queue-abstract-data-type" title="Permalink to this headline">#</a></h2>
-<p>The idea is first-in-first-out.</p>
-<p>Consider a queue at a restaurant, it starts off as empty, so we denote an empty queue as an empty list <code class="docutils literal notranslate"><span class="pre">q</span> <span class="pre">=</span> <span class="pre">[]</span></code>.</p>
-<ul class="simple">
-<li><p>First, person 1 <code class="docutils literal notranslate"><span class="pre">p1</span></code> came to queue, we place him into the queue <code class="docutils literal notranslate"><span class="pre">q</span></code> and call this <code class="docutils literal notranslate"><span class="pre">enqueue</span></code> and say that <code class="docutils literal notranslate"><span class="pre">q.enqueue(p1)</span> <span class="pre">-&gt;</span> <span class="pre">q</span> <span class="pre">=</span> <span class="pre">[p1]</span></code>;</p></li>
-<li><p>Then, person 2 <code class="docutils literal notranslate"><span class="pre">p2</span></code> came to queue, we place him into the queue <code class="docutils literal notranslate"><span class="pre">q</span></code> using <code class="docutils literal notranslate"><span class="pre">enqueue</span></code> and say that <code class="docutils literal notranslate"><span class="pre">q.enqueue(p2)</span> <span class="pre">-&gt;</span> <span class="pre">q</span> <span class="pre">=</span> <span class="pre">[p2,</span> <span class="pre">p1]</span></code>, note
-carefully we are inserting at the start of the list, as we are treating the end of a list as the <em><strong>start</strong></em> of the queue, and therefore
-<code class="docutils literal notranslate"><span class="pre">p2</span></code> has to be slotted after <code class="docutils literal notranslate"><span class="pre">p1</span></code>, which is an insertion;</p></li>
-<li><p>If we want to serve the queue, the first one in the queue will get called, we call this <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> and say that <code class="docutils literal notranslate"><span class="pre">q.dequeue()</span></code>,
-which returns <code class="docutils literal notranslate"><span class="pre">p1</span></code> and at the same time remove <code class="docutils literal notranslate"><span class="pre">p1</span></code> from the queue, so now <code class="docutils literal notranslate"><span class="pre">q</span> <span class="pre">=</span> <span class="pre">[p2]</span></code>.
-Note <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> does not take in argument.</p></li>
-</ul>
+<p>Same idea as <code class="docutils literal notranslate"><span class="pre">Queue</span></code>, but now you can insert people in the front of the queue (cut-queue 😂) and
+also remove people from the end of the queue (people leaving cause queue too long?).</p>
+<p>Note possible confusion in the method names below, as <code class="docutils literal notranslate"><span class="pre">add_front</span></code> really means insert an item
+at the front the queue but it uses <code class="docutils literal notranslate"><span class="pre">append</span></code> because we treat the rear of a list as the “front”.</p>
 </section>
 <section id="python-implementation">
 <h2>Python Implementation<a class="headerlink" href="#python-implementation" title="Permalink to this headline">#</a></h2>
@@ -487,8 +480,8 @@ Note <code class="docutils literal notranslate"><span class="pre">dequeue</span>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Any</span>
 
 
-<span class="k">class</span> <span class="nc">QueueList</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Creates a queue that uses python&#39;s default list as the underlying</span>
+<span class="k">class</span> <span class="nc">DeQueueList</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Creates a double-ended queue that uses python&#39;s default list as the underlying</span>
 <span class="sd">    data structure.</span>
 
 <span class="sd">    Attributes:</span>
@@ -515,7 +508,15 @@ Note <code class="docutils literal notranslate"><span class="pre">dequeue</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span>
 
-    <span class="k">def</span> <span class="nf">enqueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">add_front</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Insert an item at the front of the queue.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            item (Any): The current item to be added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">queue_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_rear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Insert an item at the end of the queue.</span>
 
 <span class="sd">        In this implementation, the item is inserted at the start of the list.</span>
@@ -525,7 +526,7 @@ Note <code class="docutils literal notranslate"><span class="pre">dequeue</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">queue_items</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">dequeue</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">remove_front</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Pop an item from the start of the queue.</span>
 
 <span class="sd">        In this implementation, the item at the end of the list is returned and removed.</span>
@@ -540,6 +541,19 @@ Note <code class="docutils literal notranslate"><span class="pre">dequeue</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Stack is empty&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue_items</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">remove_rear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Pop an item from the end of the queue.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            (Exception): If queue is empty.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (Any): The item at the end of the queue.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Stack is empty&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue_items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -557,33 +571,35 @@ Note <code class="docutils literal notranslate"><span class="pre">dequeue</span>
 <p>So as we pop them, it goes from <code class="docutils literal notranslate"><span class="pre">8.4,</span> <span class="pre">True,</span> <span class="pre">dog,</span> <span class="pre">4</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QueueList</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">DeQueueList</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">is_empty</span><span class="p">())</span>
 
-<span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="s2">&quot;dog&quot;</span><span class="p">)</span>
-<span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">q</span><span class="o">.</span><span class="n">add_rear</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">q</span><span class="o">.</span><span class="n">add_rear</span><span class="p">(</span><span class="s2">&quot;dog&quot;</span><span class="p">)</span>
+<span class="n">q</span><span class="o">.</span><span class="n">add_front</span><span class="p">(</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span>
+<span class="n">q</span><span class="o">.</span><span class="n">add_front</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
-
-<span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="mf">8.4</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">dequeue</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">dequeue</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">is_empty</span><span class="p">())</span>
+<span class="n">q</span><span class="o">.</span><span class="n">add_rear</span><span class="p">(</span><span class="mf">8.4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">remove_rear</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">remove_front</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
 4
-dog
-2
+False
+8.4
+True
 </pre></div>
 </div>
 </div>
 </div>
 <section id="time-complexity">
 <h3>Time Complexity<a class="headerlink" href="#time-complexity" title="Permalink to this headline">#</a></h3>
-<table class="table" id="id1">
-<caption><span class="caption-number">Table 2 </span><span class="caption-text">Time Complexity</span><a class="headerlink" href="#id1" title="Permalink to this table">#</a></caption>
+<table class="table" id="dequeue">
+<caption><span class="caption-number">Table 3 </span><span class="caption-text">Time Complexity</span><a class="headerlink" href="#dequeue" title="Permalink to this table">#</a></caption>
 <colgroup>
 <col style="width: 50%" />
 <col style="width: 50%" />
@@ -594,16 +610,23 @@ dog
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">enqueue</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">add_rear</span></code></p></td>
 <td><p><span class="math notranslate nohighlight">\(\O(n)\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dequeue</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">add_front</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\O(1)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">remove_rear</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\O(n)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">remove_front</span></code></p></td>
 <td><p><span class="math notranslate nohighlight">\(\O(1)\)</span></p></td>
 </tr>
 </tbody>
 </table>
-<p>The time complexity for both <code class="docutils literal notranslate"><span class="pre">enqueue</span></code> and <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> are <span class="math notranslate nohighlight">\(\O(n)\)</span> and <span class="math notranslate nohighlight">\(\O(1)\)</span>, an obvious consequence because the native python
-<code class="docutils literal notranslate"><span class="pre">list</span></code>’s operations <code class="docutils literal notranslate"><span class="pre">insert</span></code> and <code class="docutils literal notranslate"><span class="pre">pop</span></code> are <span class="math notranslate nohighlight">\(\O(n)\)</span> and <span class="math notranslate nohighlight">\(\O(1)\)</span> respectively, so the result follows.</p>
+<p>With reference to the previous section on <a class="reference internal" href="Queue.html"><span class="doc">Queue</span></a>, the time complexity for both <code class="docutils literal notranslate"><span class="pre">add_rear</span></code> (<code class="docutils literal notranslate"><span class="pre">enqueue</span></code>)
+and <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> (<code class="docutils literal notranslate"><span class="pre">remove_front</span></code>) are <span class="math notranslate nohighlight">\(\O(n)\)</span> and <span class="math notranslate nohighlight">\(\O(1)\)</span>, an obvious consequence because the native python
+<code class="docutils literal notranslate"><span class="pre">list</span></code>’s operations <code class="docutils literal notranslate"><span class="pre">insert</span></code> and <code class="docutils literal notranslate"><span class="pre">pop</span></code> are <span class="math notranslate nohighlight">\(\O(n)\)</span> and <span class="math notranslate nohighlight">\(\O(1)\)</span> respectively, so the result follows. The same applies to <code class="docutils literal notranslate"><span class="pre">add_front</span></code> and <code class="docutils literal notranslate"><span class="pre">remove_rear</span></code>.</p>
 </section>
 <section id="space-complexity">
 <h3>Space Complexity<a class="headerlink" href="#space-complexity" title="Permalink to this headline">#</a></h3>
@@ -614,7 +637,7 @@ dog
 <h2>Further Readings<a class="headerlink" href="#further-readings" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.geeksforgeeks.org/queue-set-1introduction-and-array-implementation/">https://www.geeksforgeeks.org/queue-set-1introduction-and-array-implementation/</a></p></li>
-<li><p><a class="reference external" href="https://runestone.academy/ns/books/published/pythonds3/BasicDS/TheQueueAbstractDataType.html">https://runestone.academy/ns/books/published/pythonds3/BasicDS/TheQueueAbstractDataType.html</a></p></li>
+<li><p><a class="reference external" href="https://runestone.academy/ns/books/published/pythonds3/BasicDS/ImplementingaDequeinPython.html">https://runestone.academy/ns/books/published/pythonds3/BasicDS/ImplementingaDequeinPython.html</a></p></li>
 </ul>
 </section>
 </section>
@@ -646,17 +669,17 @@ dog
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../stack/Questions.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Queue.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Questions</p>
+            <p class="prev-next-title">Queue</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="DeQueue.html" title="next page">
+    <a class='right-next' id="next-link" href="Questions.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Double Ended Queue</p>
+        <p class="prev-next-title">Questions</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

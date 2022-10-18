@@ -57,7 +57,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Queue" href="../queue/Queue.html" />
+    <link rel="next" title="Questions" href="Questions.html" />
     <link rel="prev" title="Introduction" href="../intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -129,6 +129,11 @@ const thebe_selector_output = ".output, .cell_output"
    Stack
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Questions.html">
+   Questions
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -139,6 +144,16 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="../queue/Queue.html">
    Queue
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../queue/DeQueue.html">
+   Double Ended Queue
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../queue/Questions.html">
+   Questions
   </a>
  </li>
 </ul>
@@ -545,10 +560,15 @@ the operation called <code class="docutils literal notranslate"><span class="pre
 <span class="sd">            We treat the end of the list as the top of the stack.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">stack_items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
+    <span class="n">_stack_items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">stack_items</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stack_items</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">stack_items</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Read only property for the stack items.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stack_items</span>
 
     <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Check if stack is empty.</span>
@@ -635,6 +655,18 @@ False
 8.4
 True
 2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">stack_items</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[4, &#39;dog&#39;]
 </pre></div>
 </div>
 </div>
@@ -877,10 +909,10 @@ Popped 30 from the stack
             <p class="prev-next-title">Introduction</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../queue/Queue.html" title="next page">
+    <a class='right-next' id="next-link" href="Questions.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Queue</p>
+        <p class="prev-next-title">Questions</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
