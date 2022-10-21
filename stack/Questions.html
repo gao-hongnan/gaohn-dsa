@@ -53,6 +53,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"O": "\\mathcal{O}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Queue" href="../queue/Queue.html" />
@@ -152,6 +154,18 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="../queue/Questions.html">
    Questions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Linked List
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../linked_list/LinkedList.html">
+   Linked List
   </a>
  </li>
 </ul>
@@ -389,8 +403,13 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#complexity">
-     Complexity
+    <a class="reference internal nav-link" href="#time-complexity">
+     Time Complexity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#space-complexity">
+     Space Complexity
     </a>
    </li>
   </ul>
@@ -425,8 +444,13 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#complexity">
-     Complexity
+    <a class="reference internal nav-link" href="#time-complexity">
+     Time Complexity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#space-complexity">
+     Space Complexity
     </a>
    </li>
   </ul>
@@ -455,7 +479,7 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dsa.dsa</span> <span class="kn">import</span> <span class="n">StackList</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dsa.stack</span> <span class="kn">import</span> <span class="n">StackList</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Any</span>
 </pre></div>
 </div>
@@ -501,8 +525,7 @@ title="Print to PDF"
 <li><p>If we encounter a closing bracket, then we check the element on top of the stack. If the element at the top of the stack is an opening bracket of the same type, then we pop it off the stack and continue processing. Else, this implies an invalid expression.</p></li>
 <li><p>In the end, if we are left with a stack still having elements, then this implies an invalid expression.</p></li>
 </ul>
-<p>Time complexity : O(n)O(n) because we simply traverse the given string one character at a time and push and pop operations on a stack take O(1)O(1) time.
-Space complexity : O(n)O(n) as we push all opening brackets onto the stack and in the worst case, we will end up pushing all the brackets onto the stack. e.g. ((((((((((.</p>
+<p>The below question is for string containing only <code class="docutils literal notranslate"><span class="pre">(</span></code> or <code class="docutils literal notranslate"><span class="pre">)</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_valid_parentheses</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -548,7 +571,8 @@ False
 </div>
 </div>
 </div>
-<p>This implementation returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if empty string is passed in.</p>
+<p>The below question is for <code class="docutils literal notranslate"><span class="pre">(),</span> <span class="pre">{},</span> <span class="pre">[]</span></code>.</p>
+<p>Note this implementation returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if empty string is passed in.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
@@ -619,8 +643,36 @@ True
 </div>
 </div>
 </div>
-<section id="complexity">
-<h3>Complexity<a class="headerlink" href="#complexity" title="Permalink to this headline">#</a></h3>
+<section id="time-complexity">
+<h3>Time Complexity<a class="headerlink" href="#time-complexity" title="Permalink to this headline">#</a></h3>
+<p>Assume the string has length <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>Operations such as <code class="docutils literal notranslate"><span class="pre">push</span></code>, <code class="docutils literal notranslate"><span class="pre">pop</span></code>, <code class="docutils literal notranslate"><span class="pre">is_empty()</span></code> and <code class="docutils literal notranslate"><span class="pre">!=</span></code> here are all <span class="math notranslate nohighlight">\(\O(1)\)</span>.</p>
+<table class="table" id="stack">
+<caption><span class="caption-number">Table 2 </span><span class="caption-text">Time Complexity</span><a class="headerlink" href="#stack" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operations</p></th>
+<th class="head"><p>Time Complexity</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">push</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\O(1)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pop</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\O(1)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>And since we traverse the given string one character at a time for at most <span class="math notranslate nohighlight">\(n\)</span> times, then the time complexity is <span class="math notranslate nohighlight">\(\O(1) \times n \approx \O(n)\)</span>.</p>
+</section>
+<section id="space-complexity">
+<h3>Space Complexity<a class="headerlink" href="#space-complexity" title="Permalink to this headline">#</a></h3>
+<p>Assume the string has length <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>The space complexity is at most <span class="math notranslate nohighlight">\(\O(n)\)</span> as we are just maintaining a stack with at most <span class="math notranslate nohighlight">\(n\)</span> elements pushed in.</p>
 </section>
 </section>
 </section>

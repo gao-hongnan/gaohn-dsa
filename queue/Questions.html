@@ -55,6 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Linked List" href="../linked_list/LinkedList.html" />
     <link rel="prev" title="Double Ended Queue" href="DeQueue.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -151,6 +152,18 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Questions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Linked List
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../linked_list/LinkedList.html">
+   Linked List
   </a>
  </li>
 </ul>
@@ -387,6 +400,11 @@ title="Print to PDF"
    Queue Simulation: Printing Tasks
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dequeue-palindrome-checker">
+   DeQueue: Palindrome Checker
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -416,6 +434,11 @@ title="Print to PDF"
    Queue Simulation: Printing Tasks
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dequeue-palindrome-checker">
+   DeQueue: Palindrome Checker
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -440,7 +463,7 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dsa.dsa</span> <span class="kn">import</span> <span class="n">QueueList</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dsa.queue</span> <span class="kn">import</span> <span class="n">QueueList</span><span class="p">,</span> <span class="n">DeQueueList</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Any</span>
 </pre></div>
 </div>
@@ -506,6 +529,49 @@ title="Print to PDF"
 <h2>Queue Simulation: Printing Tasks<a class="headerlink" href="#queue-simulation-printing-tasks" title="Permalink to this headline">#</a></h2>
 <p><a class="reference external" href="https://runestone.academy/ns/books/published/pythonds3/BasicDS/SimulationPrintingTasks.html">Question details can be found here</a>.</p>
 </section>
+<section id="dequeue-palindrome-checker">
+<h2>DeQueue: Palindrome Checker<a class="headerlink" href="#dequeue-palindrome-checker" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">str_1</span> <span class="o">=</span> <span class="s2">&quot;radar&quot;</span>
+<span class="n">str_2</span> <span class="o">=</span> <span class="s2">&quot;lsdkjfskf&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">check_palindrome</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">deque</span> <span class="o">=</span> <span class="n">DeQueueList</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">string</span><span class="p">:</span>
+        <span class="n">deque</span><span class="o">.</span><span class="n">add_rear</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>  <span class="c1"># enqueue</span>
+
+    <span class="k">while</span> <span class="n">deque</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">front</span> <span class="o">=</span> <span class="n">deque</span><span class="o">.</span><span class="n">remove_front</span><span class="p">()</span>
+        <span class="n">rear</span> <span class="o">=</span> <span class="n">deque</span><span class="o">.</span><span class="n">remove_rear</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">front</span> <span class="o">!=</span> <span class="n">rear</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># if deque.size = 1 then it must be true</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">check_palindrome</span><span class="p">(</span><span class="n">str_1</span><span class="p">),</span> <span class="n">check_palindrome</span><span class="p">(</span><span class="n">str_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(True, False)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -541,6 +607,13 @@ title="Print to PDF"
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Double Ended Queue</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="../linked_list/LinkedList.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Linked List</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>

@@ -1,0 +1,1098 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Linked List &#8212; Data Structures &amp; Algorithms</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"O": "\\mathcal{O}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Questions" href="../queue/Questions.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Structures & Algorithms</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Stack
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../stack/Stack.html">
+   Stack
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../stack/Questions.html">
+   Questions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Queue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../queue/Queue.html">
+   Queue
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../queue/DeQueue.html">
+   Double Ended Queue
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../queue/Questions.html">
+   Questions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Linked List
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Linked List
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/gao-hongnan/gaohn-dsa/main?urlpath=tree/content/linked_list/LinkedList.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/gao-hongnan/gaohn-dsa/blob/main/content/linked_list/LinkedList.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/gao-hongnan/gaohn-dsa"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/gao-hongnan/gaohn-dsa/issues/new?title=Issue%20on%20page%20%2Flinked_list/LinkedList.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/linked_list/LinkedList.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#node-object">
+   Node Object
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linked-list-object">
+   Linked List Object
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#base-class">
+     Base Class
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#traversing-a-linked-list">
+     Traversing a Linked List
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#a-wrong-attempt">
+       A Wrong Attempt
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#static-method">
+       Static Method
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linked-list-walkthrough">
+   Linked List Walkthrough
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Linked List</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#node-object">
+   Node Object
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linked-list-object">
+   Linked List Object
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#base-class">
+     Base Class
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#traversing-a-linked-list">
+     Traversing a Linked List
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#a-wrong-attempt">
+       A Wrong Attempt
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#static-method">
+       Static Method
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linked-list-walkthrough">
+   Linked List Walkthrough
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="linked-list">
+<h1>Linked List<a class="headerlink" href="#linked-list" title="Permalink to this headline">#</a></h1>
+<p><a class="reference external" href="https://colab.research.google.com/github/reighns92/reighns-ml-blog/blob/master/docs/reighns_ml_journey/data_structures_and_algorithms/Linked%20List.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">TypeVar</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="node-object">
+<h2>Node Object<a class="headerlink" href="#node-object" title="Permalink to this headline">#</a></h2>
+<p>We create the <code class="docutils literal notranslate"><span class="pre">Node</span></code> object below. This object is currently going to be used for Singly Linked List.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Node object is initialized with a value and can be linked to the next node by setting the next_node attribute to a Node object.</span>
+<span class="sd">    This node is Singular associated with Singly Linked List.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        curr_node_value (Any): The value associated with the created node.</span>
+<span class="sd">        next_node (Node): The next node in the linked list. Note the distinction between curr_node_value and next_node, the former is the value of the node, the latter is the pointer to the next node.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; node = Node(1)</span>
+<span class="sd">        &gt;&gt;&gt; print(node.curr_node_value)</span>
+<span class="sd">        1</span>
+<span class="sd">        &gt;&gt;&gt; print(node.next_node)</span>
+<span class="sd">        None</span>
+<span class="sd">        &gt;&gt;&gt; node.next_node = Node(2)</span>
+<span class="sd">        &gt;&gt;&gt; print(node.next_node.curr_node_value)</span>
+<span class="sd">        2</span>
+<span class="sd">        &gt;&gt;&gt; print(node.next_node.next_node)</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">curr_node_value</span><span class="p">:</span> <span class="n">T</span>
+    <span class="n">next_node</span><span class="p">:</span> <span class="n">Node</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>One thing for me to visualize is the <code class="docutils literal notranslate"><span class="pre">Node</span></code> object is not just a single object. If we are talking about one node, then our node object should hold a <code class="docutils literal notranslate"><span class="pre">curr_node_value</span></code> and the <code class="docutils literal notranslate"><span class="pre">next_node</span></code> attribute should point to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">Node</span></code> object holds more than one node, then we can imagine the whole <code class="docutils literal notranslate"><span class="pre">Node</span></code> object as a series of nodes. We can only access the nodes sequentially, starting from the first node.</p>
+<img src="https://storage.googleapis.com/reighns/reighns_ml_projects/docs/data_structures_and_algorithms/linked_list/nodes.png" style="margin-left:auto; margin-right:auto"/>
+<p style="text-align: center">
+    <b>Nodes</b>
+</p><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">curr_node_value</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">next_node</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">curr_node_value</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+None
+2
+None
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="linked-list-object">
+<h2>Linked List Object<a class="headerlink" href="#linked-list-object" title="Permalink to this headline">#</a></h2>
+<section id="base-class">
+<h3>Base Class<a class="headerlink" href="#base-class" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">head</span></code> node (the first node) of a <strong>Linked List</strong> is of a <code class="docutils literal notranslate"><span class="pre">Node</span></code> object. The <code class="docutils literal notranslate"><span class="pre">head</span></code> <strong>entirely determines</strong> the entirety of the whole <strong>Linked List</strong>. Why? Because knowing the head node of the <strong>Linked List</strong>, we will be able to know every single node that comes after it sequentially (if exists).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LinkedList</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The LinkedList object is initialized with a head node.</span>
+
+<span class="sd">    The `head` node (the first node) of a **Linked List** is of a `Node` object.</span>
+<span class="sd">    The `head` **entirely determines** the entirety of the whole **Linked List**. </span>
+<span class="sd">    Because knowing the head node of the **Linked List**, we will be able to know every single node that comes after it sequentially (if exists).</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        head (Node): The head node of the linked list.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">head</span><span class="p">:</span> <span class="n">Node</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us walk through how to create a <strong>Linked List</strong>.</p>
+<ol class="simple">
+<li><p>Start with an empty linked list object. The head of the linked list is None.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">llist</span> <span class="o">=</span> <span class="n">LinkedList</span><span class="p">()</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>We create 3 <code class="docutils literal notranslate"><span class="pre">Node</span></code> objects as of now, these 3 node object holds value of 1, 2 and 3 respectively. They are not linked, which can be verified by printing <code class="docutils literal notranslate"><span class="pre">.next</span></code> which returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">first_node</span><span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">second_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">third_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol>
+<li><p>Now we assign the first node object <code class="docutils literal notranslate"><span class="pre">first_node</span> <span class="pre">=</span> <span class="pre">Node(1)</span></code> to the <code class="docutils literal notranslate"><span class="pre">head</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">llist</span></code> object. We further note that both <code class="docutils literal notranslate"><span class="pre">first_node</span></code> and <code class="docutils literal notranslate"><span class="pre">llist.head</span></code> now point to the same object and both are of type <code class="docutils literal notranslate"><span class="pre">Node</span></code> and each of them holds a <code class="docutils literal notranslate"><span class="pre">value</span></code> of <span class="math notranslate nohighlight">\(1\)</span>. We also have to be clear that we did not link the head (first) node to the next (second) node yet.</p>
+<div class="math notranslate nohighlight">
+\[
+    \textbf{first_node} \to \textbf{None}
+    \]</div>
+</li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">llist</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">first_node</span>
+
+<span class="k">assert</span> <span class="nb">id</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">first_node</span><span class="p">)</span>
+<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="n">Node</span><span class="p">)</span> <span class="o">==</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">first_node</span><span class="p">,</span> <span class="n">Node</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">curr_node_value</span> <span class="o">==</span> <span class="n">first_node</span><span class="o">.</span><span class="n">curr_node_value</span> <span class="o">==</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<ol>
+<li><p>We now link the first node with the second by populating the <code class="docutils literal notranslate"><span class="pre">next_node</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">head</span></code> of the linked list <code class="docutils literal notranslate"><span class="pre">llist</span></code> (i.e. <code class="docutils literal notranslate"><span class="pre">llist.head.next_node</span> <span class="pre">=</span> <span class="pre">second_node</span></code>).</p>
+<p>We further note that both <code class="docutils literal notranslate"><span class="pre">llist.head.next_node</span></code> and <code class="docutils literal notranslate"><span class="pre">second_node</span></code> now point to the same object and both are of type <code class="docutils literal notranslate"><span class="pre">Node</span></code> and each of them holds a <code class="docutils literal notranslate"><span class="pre">curr_node_value</span></code> of <span class="math notranslate nohighlight">\(2\)</span>.</p>
+<p>Now the linked list <code class="docutils literal notranslate"><span class="pre">llist</span></code> has connected the first node and the second node in a linear fashion:</p>
+<div class="math notranslate nohighlight">
+\[
+    \textbf{first_node} \to \textbf{second_node} \to \textbf{None}
+    \]</div>
+<p>So to reiterate, our linked list <code class="docutils literal notranslate"><span class="pre">llist</span></code> at this stage is akin to a list <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2]</span></code>. To access the first value of the linked list we can do <code class="docutils literal notranslate"><span class="pre">llist.head.curr_node_value</span></code> and to get the next value we can call <code class="docutils literal notranslate"><span class="pre">llist.head.next_node.curr_node_value</span></code>.</p>
+</li>
+<li><p>We now link the second node with the third by populating the <code class="docutils literal notranslate"><span class="pre">next_node</span></code> attribute of the second node of the linked list <code class="docutils literal notranslate"><span class="pre">llist</span></code>, but to do so, we must actually reach the second node. (i.e. <code class="docutils literal notranslate"><span class="pre">llist.head.next_node.next_node</span> <span class="pre">=</span> <span class="pre">third_node</span></code>).</p>
+<p>We further note that both <code class="docutils literal notranslate"><span class="pre">llist.head.next_node.next_node</span></code> and <code class="docutils literal notranslate"><span class="pre">third_node</span></code> now point to the same object and both are of type <code class="docutils literal notranslate"><span class="pre">Node</span></code> and each of them holds a <code class="docutils literal notranslate"><span class="pre">curr_node_value</span></code> of <span class="math notranslate nohighlight">\(3\)</span>.</p>
+<p>Now the linked list <code class="docutils literal notranslate"><span class="pre">llist</span></code> has connected the second node and the third node in a linear fashion:</p>
+<div class="math notranslate nohighlight">
+\[
+    \textbf{first_node} \to \textbf{second_node} \to \textbf{third_node} \to \textbf{None}
+    \]</div>
+<p>So to reiterate, our linked list <code class="docutils literal notranslate"><span class="pre">llist</span></code> at this stage is akin to a list <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code>. To access the first value of the linked list we can do <code class="docutils literal notranslate"><span class="pre">llist.head.curr_node_value</span></code> and to get the next value we can call <code class="docutils literal notranslate"><span class="pre">llist.head.next_node.curr_node_value</span></code> and to get the third value, <code class="docutils literal notranslate"><span class="pre">llist.head.next_node.next_node.value</span></code>. There should be no confusion why we can chain attribute <code class="docutils literal notranslate"><span class="pre">next_node</span></code> here, since <code class="docutils literal notranslate"><span class="pre">llist.head.next_node</span></code> and <code class="docutils literal notranslate"><span class="pre">llist.head.next_node.next_node</span></code> are two different <code class="docutils literal notranslate"><span class="pre">Node</span></code> objects, so there won’t be any overwriting of the <code class="docutils literal notranslate"><span class="pre">next_node</span></code> attribute.</p>
+</li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1</span>
+<span class="n">llist</span> <span class="o">=</span> <span class="n">LinkedList</span><span class="p">()</span>
+
+<span class="c1"># 2</span>
+<span class="n">first_node</span><span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">second_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">third_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># 3</span>
+<span class="n">llist</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">first_node</span>
+
+<span class="k">assert</span> <span class="nb">id</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">first_node</span><span class="p">)</span>
+<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="n">Node</span><span class="p">)</span> <span class="o">==</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">first_node</span><span class="p">,</span> <span class="n">Node</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">curr_node_value</span> <span class="o">==</span> <span class="n">first_node</span><span class="o">.</span><span class="n">curr_node_value</span> <span class="o">==</span> <span class="mi">1</span>
+
+<span class="c1"># 4</span>
+<span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">second_node</span><span class="p">;</span> <span class="c1"># Link first node with second</span>
+
+<span class="k">assert</span> <span class="nb">id</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">second_node</span><span class="p">)</span>
+<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="p">,</span> <span class="n">Node</span><span class="p">)</span> <span class="o">==</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">second_node</span><span class="p">,</span> <span class="n">Node</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">curr_node_value</span> <span class="o">==</span> <span class="n">second_node</span><span class="o">.</span><span class="n">curr_node_value</span> <span class="o">==</span> <span class="mi">2</span>
+
+<span class="c1"># 5</span>
+<span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">third_node</span><span class="p">;</span> <span class="c1"># Link second node with the third node</span>
+
+<span class="k">assert</span> <span class="nb">id</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">third_node</span><span class="p">)</span>
+<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span><span class="p">,</span> <span class="n">Node</span><span class="p">)</span> <span class="o">==</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">third_node</span><span class="p">,</span> <span class="n">Node</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">curr_node_value</span> <span class="o">==</span> <span class="n">third_node</span><span class="o">.</span><span class="n">curr_node_value</span> <span class="o">==</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="traversing-a-linked-list">
+<h3>Traversing a Linked List<a class="headerlink" href="#traversing-a-linked-list" title="Permalink to this headline">#</a></h3>
+<section id="a-wrong-attempt">
+<h4>A Wrong Attempt<a class="headerlink" href="#a-wrong-attempt" title="Permalink to this headline">#</a></h4>
+<p>We first show a wrong attempt. The logic in <code class="docutils literal notranslate"><span class="pre">traverse</span></code> is as follows:</p>
+<ol class="simple">
+<li><p>We want to terminate the printing when we reach the last node, that is to say, when the last node is reached, the <code class="docutils literal notranslate"><span class="pre">.next_node</span></code> attribute should return <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p>We start off with the head node <code class="docutils literal notranslate"><span class="pre">self.head</span></code> and print <code class="docutils literal notranslate"><span class="pre">self.head.curr_node_value</span></code> in the first while loop to get the first node value.</p></li>
+<li><p>Subsequently, we overwrite <code class="docutils literal notranslate"><span class="pre">self.head</span></code> to be <code class="docutils literal notranslate"><span class="pre">self.head.next_node</span></code> after printing, so when the next while loop happens, printing <code class="docutils literal notranslate"><span class="pre">self.head.curr_node_value</span></code> actually points to <code class="docutils literal notranslate"><span class="pre">self.head.next_node.curr_node_value</span></code>. The logic continues until we reach the last node.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LinkedList</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The LinkedList object is initialized with a head node.</span>
+
+<span class="sd">    The `head` node (the first node) of a **Linked List** is of a `Node` object.</span>
+<span class="sd">    The `head` **entirely determines** the entirety of the whole **Linked List**.</span>
+<span class="sd">    Because knowing the head node of the **Linked List**, we will be able to know every single node that comes after it sequentially (if exists).</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        head (Node): The head node of the linked list.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">head</span><span class="p">:</span> <span class="n">Node</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">traverse</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Traverse the linked list and print the values of each node.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; first = Node(1)</span>
+<span class="sd">            &gt;&gt;&gt; second = Node(2)</span>
+<span class="sd">            &gt;&gt;&gt; third = Node(3)</span>
+<span class="sd">            &gt;&gt;&gt; ll = LinkedList()</span>
+<span class="sd">            &gt;&gt;&gt; ll.head = first</span>
+<span class="sd">            &gt;&gt;&gt; ll.head.next_node = second</span>
+<span class="sd">            &gt;&gt;&gt; ll.head.next_node.next_node = third</span>
+<span class="sd">            &gt;&gt;&gt; ll.traverse(ll.head)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">curr_node_value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span>
+            
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;None&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">first</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">second</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">third</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ll</span> <span class="o">=</span> <span class="n">LinkedList</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ll</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">first</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">second</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">third</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ll</span><span class="o">.</span><span class="n">traverse</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+2
+3
+None
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code above works fine, but is not ideal since if we want to access <code class="docutils literal notranslate"><span class="pre">llist.head.curr_node_value</span></code> after calling <code class="docutils literal notranslate"><span class="pre">llist.traverse()</span></code>, there will be <code class="docutils literal notranslate"><span class="pre">AttributeError:</span> <span class="pre">'NoneType'</span> <span class="pre">object</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">attribute</span> <span class="pre">'value'</span></code> since we already set <code class="docutils literal notranslate"><span class="pre">self.head</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code> in our last loop. Thus, we should change the code a bit where we assign a <code class="docutils literal notranslate"><span class="pre">temp</span></code> variable to <code class="docutils literal notranslate"><span class="pre">self.head</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temp_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span>
+<span class="k">while</span> <span class="n">temp_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">temp_node</span><span class="o">.</span><span class="n">curr_node_value</span><span class="p">)</span>
+    <span class="n">temp_node</span> <span class="o">=</span> <span class="n">temp_node</span><span class="o">.</span><span class="n">next_node</span>
+
+    <span class="k">if</span> <span class="n">temp_node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;None&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">isinstance</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
+<span class="c1"># print(ll.head.curr_node_value)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="static-method">
+<h4>Static Method<a class="headerlink" href="#static-method" title="Permalink to this headline">#</a></h4>
+<p>Since I am just starting out on this topic, I want to keep the <code class="docutils literal notranslate"><span class="pre">traverse</span></code> method as a standalone function. This is easier for me to debug.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LinkedList</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The LinkedList object is initialized with a head node.</span>
+
+<span class="sd">    The `head` node (the first node) of a **Linked List** is of a `Node` object.</span>
+<span class="sd">    The `head` **entirely determines** the entirety of the whole **Linked List**.</span>
+<span class="sd">    Because knowing the head node of the **Linked List**, we will be able to know every single node that comes after it sequentially (if exists).</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        head (Node): The head node of the linked list.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">head</span><span class="p">:</span> <span class="n">Node</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">head_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Traverse the linked list and print the values of each node.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            head_node (Node): The head node of a linked list.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; first = Node(1)</span>
+<span class="sd">            &gt;&gt;&gt; second = Node(2)</span>
+<span class="sd">            &gt;&gt;&gt; third = Node(3)</span>
+<span class="sd">            &gt;&gt;&gt; ll = LinkedList()</span>
+<span class="sd">            &gt;&gt;&gt; ll.head = first</span>
+<span class="sd">            &gt;&gt;&gt; ll.head.next_node = second</span>
+<span class="sd">            &gt;&gt;&gt; ll.head.next_node.next_node = third</span>
+<span class="sd">            &gt;&gt;&gt; ll.traverse(ll.head)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">temp_node</span> <span class="o">=</span> <span class="n">head_node</span>
+
+        <span class="k">while</span> <span class="n">temp_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">temp_node</span><span class="o">.</span><span class="n">curr_node_value</span><span class="p">)</span>
+            <span class="n">temp_node</span> <span class="o">=</span> <span class="n">temp_node</span><span class="o">.</span><span class="n">next_node</span>
+            <span class="k">if</span> <span class="n">temp_node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;None&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">first</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">second</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">third</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ll</span> <span class="o">=</span> <span class="n">LinkedList</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ll</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">first</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">second</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">third</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ll</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+2
+3
+None
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="linked-list-walkthrough">
+<h2>Linked List Walkthrough<a class="headerlink" href="#linked-list-walkthrough" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
+    <span class="n">curr_node_value</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="c1"># next_node: self</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">curr_node_value</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># a node can hold a current value and by default its next node is None</span>
+        <span class="c1"># however we can assign values to the next of a node, but the next must be of object node as denoted</span>
+        <span class="c1"># note the distinction between curr node value and next node, they are diff</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">curr_node_value</span> <span class="o">=</span> <span class="n">curr_node_value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">class</span> <span class="nc">LinkedList</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># key point is that end of every llist, it points to None always</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="kc">None</span>
+        
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">add_node_before_head</span><span class="p">(</span><span class="n">head_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">node_value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+        <span class="c1"># if you set head_node to self.head</span>
+        <span class="c1"># first = Node(1)</span>
+        <span class="c1"># second = Node(2)</span>
+        <span class="c1"># third = Node(3)</span>
+        
+        <span class="c1"># ll = LinkedList()</span>
+        <span class="c1"># ll.head = first</span>
+        <span class="c1"># ll.head.next_node = second</span>
+        <span class="c1"># ll.head.next_node.next_node = third</span>
+        
+        <span class="c1"># ll.add_node_before_head(0)</span>
+        
+        <span class="c1"># if you do these above, it won&#39;t get you 0123None, it gives 0None</span>
+        <span class="c1"># because we are referring to self.head in this code block and self.head is None</span>
+        <span class="c1"># therefore for clarity of my learning, I will do all staticmethods first then internalize one day.</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Before inserting in the beginning&quot;</span><span class="p">)</span>
+        <span class="n">LinkedList</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">head_node</span><span class="p">)</span>
+        <span class="n">new_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">node_value</span><span class="p">)</span>
+        <span class="n">new_node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">head_node</span>
+        <span class="n">head_node</span><span class="o">=</span> <span class="n">new_node</span> 
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After inserting in the beginning&quot;</span><span class="p">)</span>
+        <span class="n">LinkedList</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">head_node</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">head_node</span>
+        
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">add_node_after_node</span><span class="p">(</span><span class="n">prev_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">node_value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">prev_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;There should be a previous node in the given LinkedList!&quot;</span>
+        <span class="n">next_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">node_value</span><span class="p">)</span>
+        <span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">prev_node</span><span class="o">.</span><span class="n">next_node</span>
+        <span class="n">prev_node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">next_node</span>
+        <span class="n">LinkedList</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">prev_node</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">prev_node</span>
+        
+        
+    <span class="c1"># def add_single_node(self, node_value: Any) -&gt; Node:</span>
+    <span class="c1">#     if self.head is None:</span>
+    <span class="c1">#         self.head = Node(node_value)</span>
+    <span class="c1">#     else:</span>
+    <span class="c1">#         self.head.next_node = Node(node_value)</span>
+        
+    <span class="k">def</span> <span class="nf">add_multiple_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_of_node_values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">node_value</span> <span class="ow">in</span> <span class="n">list_of_node_values</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">node_value</span>
+        
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">head_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">):</span>
+        <span class="c1"># stay true to the idea of having None as the &quot;last last Node&quot;</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">head_node</span>
+        
+        <span class="k">while</span> <span class="n">temp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">curr_node_value</span><span class="p">)</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">next_node</span>
+            <span class="k">if</span> <span class="n">temp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;None&quot;</span><span class="p">)</span>
+                
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">head_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Traverse current head node:&quot;</span><span class="p">)</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">head_node</span><span class="p">)</span>
+        
+        <span class="n">prev_node</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">curr_node</span> <span class="o">=</span> <span class="n">head_node</span>
+            
+        <span class="k">while</span> <span class="n">curr_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="n">curr_node</span>
+            <span class="n">curr_node</span> <span class="o">=</span> <span class="n">curr_node</span><span class="o">.</span><span class="n">next_node</span>
+            <span class="n">temp</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">prev_node</span>
+            <span class="n">prev_node</span> <span class="o">=</span> <span class="n">temp</span>
+        
+        <span class="n">reversed_head_node</span> <span class="o">=</span> <span class="n">prev_node</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Traverse reversed head node:&quot;</span><span class="p">)</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">reversed_head_node</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">reversed_head_node</span>
+    
+
+<span class="c1"># to be more clear we isolate the reverse linked list fn</span>
+<span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="n">head</span><span class="p">):</span>
+
+    <span class="n">prev_node</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">curr_node</span> <span class="o">=</span> <span class="n">head</span>
+        
+    <span class="k">while</span> <span class="n">curr_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">curr_node</span>
+        <span class="n">curr_node</span> <span class="o">=</span> <span class="n">curr_node</span><span class="o">.</span><span class="n">next_node</span>
+        <span class="n">temp</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">prev_node</span>
+        <span class="n">prev_node</span> <span class="o">=</span> <span class="n">temp</span>
+    
+    <span class="n">reversed_head_node</span> <span class="o">=</span> <span class="n">prev_node</span>
+
+    <span class="k">return</span> <span class="n">reversed_head_node</span>
+
+    
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># a = dummy_convert_to_redcap()</span>
+    <span class="n">first</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">second</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">third</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    
+    <span class="n">ll</span> <span class="o">=</span> <span class="n">LinkedList</span><span class="p">()</span>
+    <span class="n">ll</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">first</span>
+    <span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">second</span>
+    <span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">third</span>
+    
+    <span class="c1"># ll.add_node_before_head(ll.head, 0)</span>
+    
+    <span class="n">ll</span><span class="o">.</span><span class="n">reverse</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Traverse current head node:
+1
+2
+3
+None
+Traverse reversed head node:
+3
+2
+1
+None
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.geeksforgeeks.org/linked-list-set-1-introduction/?ref=lbp">Linked List | Set 1 (Introduction) (GeeksforGeeks)</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=XDO6I8jxHtA">Amazon Coding Interview Question: Reverse a Linked List (Leetcode 206 in Python)</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/python-linked-lists-c3622205da81">How to Implement a Linked List in Python</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./linked_list"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../queue/Questions.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Questions</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Hongnan Gao<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
