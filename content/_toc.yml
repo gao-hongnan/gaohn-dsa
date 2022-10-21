@@ -13,5 +13,7 @@ parts:
       - file: queue/Queue.ipynb
       - file: queue/DeQueue.ipynb
       - file: queue/Questions.ipynb
-
+  - caption: Linked List
+    chapters:
+      - file: linked_list/LinkedList.ipynb
 
