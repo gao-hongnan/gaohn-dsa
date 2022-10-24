@@ -530,27 +530,6 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    The Node object is initialized with a value and can be linked to the next node by setting the next_node attribute to a Node object.</span>
-<span class="sd">    This node is Singular associated with Singly Linked List.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        curr_node_value (Any): The value associated with the created node.</span>
-<span class="sd">        next_node (Node): The next node in the linked list. Note the distinction between curr_node_value and next_node, the former is the value of the node, the latter is the pointer to the next node.</span>
-
-<span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; node = Node(1)</span>
-<span class="sd">        &gt;&gt;&gt; print(node.curr_node_value)</span>
-<span class="sd">        1</span>
-<span class="sd">        &gt;&gt;&gt; print(node.next_node)</span>
-<span class="sd">        None</span>
-<span class="sd">        &gt;&gt;&gt; node.next_node = Node(2)</span>
-<span class="sd">        &gt;&gt;&gt; print(node.next_node.curr_node_value)</span>
-<span class="sd">        2</span>
-<span class="sd">        &gt;&gt;&gt; print(node.next_node.next_node)</span>
-<span class="sd">        None</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="n">curr_node_value</span><span class="p">:</span> <span class="n">T</span>
     <span class="n">next_node</span><span class="p">:</span> <span class="n">Node</span> <span class="o">=</span> <span class="kc">None</span>
 </pre></div>
@@ -590,7 +569,8 @@ None
 <h2>Linked List Object<a class="headerlink" href="#linked-list-object" title="Permalink to this headline">#</a></h2>
 <section id="base-class">
 <h3>Base Class<a class="headerlink" href="#base-class" title="Permalink to this headline">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">head</span></code> node (the first node) of a <strong>Linked List</strong> is of a <code class="docutils literal notranslate"><span class="pre">Node</span></code> object. The <code class="docutils literal notranslate"><span class="pre">head</span></code> <strong>entirely determines</strong> the entirety of the whole <strong>Linked List</strong>. Why? Because knowing the head node of the <strong>Linked List</strong>, we will be able to know every single node that comes after it sequentially (if exists).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">head</span></code> node (the first node) of a <strong>Linked List</strong> is of a <code class="docutils literal notranslate"><span class="pre">Node</span></code> object. The <code class="docutils literal notranslate"><span class="pre">head</span></code> <strong>entirely determines</strong> the entirety of the whole <strong>Linked List</strong>. Why?</p>
+<p>Because knowing the head node of the <strong>Linked List</strong>, we will be able to know every single node that comes after it sequentially (if exists).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LinkedList</span><span class="p">:</span>
@@ -993,7 +973,6 @@ None
     
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="c1"># a = dummy_convert_to_redcap()</span>
     <span class="n">first</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">second</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">third</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -1032,6 +1011,7 @@ None
 <li><p><a class="reference external" href="https://www.geeksforgeeks.org/linked-list-set-1-introduction/?ref=lbp">Linked List | Set 1 (Introduction) (GeeksforGeeks)</a></p></li>
 <li><p><a class="reference external" href="https://www.youtube.com/watch?v=XDO6I8jxHtA">Amazon Coding Interview Question: Reverse a Linked List (Leetcode 206 in Python)</a></p></li>
 <li><p><a class="reference external" href="https://towardsdatascience.com/python-linked-lists-c3622205da81">How to Implement a Linked List in Python</a></p></li>
+<li><p><a class="reference external" href="https://realpython.com/linked-lists-python/#how-to-create-a-linked-list">https://realpython.com/linked-lists-python/#how-to-create-a-linked-list</a></p></li>
 </ul>
 </section>
 </section>

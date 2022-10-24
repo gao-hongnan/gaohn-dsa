@@ -491,7 +491,7 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hot_potato</span><span class="p">(</span><span class="n">names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">q</span> <span class="o">=</span> <span class="n">QueueList</span><span class="p">()</span>
+    <span class="n">q</span><span class="p">:</span> <span class="n">QuestList</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">QueueList</span><span class="p">()</span> <span class="c1"># show that we can now denote a type for QuestList because we inherited the Generic[T]</span>
 
     <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
         <span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
@@ -542,7 +542,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">check_palindrome</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="n">deque</span> <span class="o">=</span> <span class="n">DeQueueList</span><span class="p">()</span>
+    <span class="n">deque</span><span class="p">:</span> <span class="n">DeQueueList</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">DeQueueList</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">string</span><span class="p">:</span>
         <span class="n">deque</span><span class="o">.</span><span class="n">add_rear</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>  <span class="c1"># enqueue</span>
