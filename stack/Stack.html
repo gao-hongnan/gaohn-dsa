@@ -57,7 +57,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Questions" href="Questions.html" />
+    <link rel="next" title="Queue" href="../queue/Queue.html" />
     <link rel="prev" title="Introduction" href="../intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -127,11 +127,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Stack
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Questions.html">
-   Questions
   </a>
  </li>
 </ul>
@@ -398,10 +393,15 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#python-implementation">
-   Python Implementation
+  <a class="reference internal nav-link" href="#implementing-stack-using-list">
+   Implementing Stack Using List
   </a>
   <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#python-implementation">
+     Python Implementation
+    </a>
+   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#time-complexity">
      Time Complexity
@@ -466,10 +466,15 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#python-implementation">
-   Python Implementation
+  <a class="reference internal nav-link" href="#implementing-stack-using-list">
+   Implementing Stack Using List
   </a>
   <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#python-implementation">
+     Python Implementation
+    </a>
+   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#time-complexity">
      Time Complexity
@@ -524,21 +529,25 @@ title="Print to PDF"
 <p><a class="reference external" href="https://colab.research.google.com/github/reighns92/reighns-ml-blog/blob/master/docs/reighns_ml_journey/data_structures_and_algorithms/Stack.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <section id="the-stack-abstract-data-type">
 <h2>The Stack Abstract Data Type<a class="headerlink" href="#the-stack-abstract-data-type" title="Permalink to this headline">#</a></h2>
-<p>Think of a stack as a stack of plates.</p>
-<p>Consider eating in a restaurant, all the food are served on plates, every time you
-finished a plate, you will place it at a place called the “stacked plate loader”, all stacked on top of one another.</p>
-<p>The stacked plate loader is initially empty, so we can call it <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">[]</span></code>, which corresponds to an empty list.
-We treat the end of the list as the top of the stack.</p>
+<p>Think of a <code class="docutils literal notranslate"><span class="pre">stack</span></code> as a <em><strong>stack of plates</strong></em>.</p>
+<p>Consider eating in a sushi restaurant, all the sushis are served on plates, every time you
+finish a plate, you will place the plate on a <strong>plate loader</strong>, all stacked on top of one another.
+We call this <strong>plate loader</strong> a <strong>stack</strong>.</p>
+<p>Let’s transition the idea of a <strong>stack</strong> from real life into code.</p>
+<p>The <strong>plate loader (stack)</strong> is initially empty, so we initiate the <code class="docutils literal notranslate"><span class="pre">stack</span></code>, which we abbreviate to be <code class="docutils literal notranslate"><span class="pre">s</span></code>.
+<code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">[]</span></code> since it is empty and corresponds to an empty list.
+<em><strong>We treat the end of the list as the top of the stack.</strong></em></p>
+<p>Now imagine the following:</p>
 <ul class="simple">
-<li><p>Once I finished my first plate called <code class="docutils literal notranslate"><span class="pre">p1</span></code>, I will place it in the stack, an operation called <code class="docutils literal notranslate"><span class="pre">push</span></code>, defined by <code class="docutils literal notranslate"><span class="pre">s.push(p1)</span></code>.
+<li><p>Once I finished my first plate of sushi, which we will call <code class="docutils literal notranslate"><span class="pre">p1</span></code>, I will place it on the stack, an operation called <code class="docutils literal notranslate"><span class="pre">push</span></code>, defined by <code class="docutils literal notranslate"><span class="pre">s.push(p1)</span></code>.
 Now our <code class="docutils literal notranslate"><span class="pre">s</span></code> is no longer empty, as it has <code class="docutils literal notranslate"><span class="pre">p1</span></code> inside now, <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">[p1]</span></code>.</p></li>
 <li><p>I finished another plate called <code class="docutils literal notranslate"><span class="pre">p2</span></code> and placed it on top of the stack, this means we are <em><strong>appending</strong></em> to the list, since
-the top of the stack is the end of the list. So now performing <code class="docutils literal notranslate"><span class="pre">s.push(p2)</span> <span class="pre">-&gt;</span> <span class="pre">s</span> <span class="pre">=</span> <span class="pre">[p1,</span> <span class="pre">p2]</span></code>.</p></li>
-<li><p>The waiters saw that I have two plates and decided to clear the top most plate <code class="docutils literal notranslate"><span class="pre">p2</span></code>, this operation is defined
+the top of the stack is the end of the list. This is equivalent to performing <code class="docutils literal notranslate"><span class="pre">s.push(p2)</span> <span class="pre">-&gt;</span> <span class="pre">s</span> <span class="pre">=</span> <span class="pre">[p1,</span> <span class="pre">p2]</span></code>.</p></li>
+<li><p>The waiters saw that I have two plates and decided to clear the top most plate <code class="docutils literal notranslate"><span class="pre">p2</span></code>, this operation is defined by
 the operation called <code class="docutils literal notranslate"><span class="pre">pop</span></code>, which <em><strong>returns and removes</strong></em> the top most item on the stack. Therefore,
-<code class="docutils literal notranslate"><span class="pre">s.pop()</span> <span class="pre">-&gt;</span> <span class="pre">p2</span></code> which means <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">[p1]</span></code> now.</p></li>
+<code class="docutils literal notranslate"><span class="pre">s.pop()</span> <span class="pre">-&gt;</span> <span class="pre">p2</span></code> which means <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">[p1]</span></code> now since <code class="docutils literal notranslate"><span class="pre">p2</span></code> is removed from the stack.</p></li>
 </ul>
-<p>So a stack has two fundamental operations: <code class="docutils literal notranslate"><span class="pre">push</span></code> and <code class="docutils literal notranslate"><span class="pre">pop</span></code>.</p>
+<p>We have went through the two fundamental operations on stack: <code class="docutils literal notranslate"><span class="pre">push</span></code> and <code class="docutils literal notranslate"><span class="pre">pop</span></code>.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">push</span></code> operation pushes something on the top of the stack (appending to a list);</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pop</span></code> operation returns and removes the top most item from the stack (popping from the list).</p></li>
@@ -546,18 +555,20 @@ the operation called <code class="docutils literal notranslate"><span class="pre
 <figure class="align-default" id="stack-flow">
 <img alt="../_images/stack_flow.png" src="../_images/stack_flow.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Stack Flow.</span><a class="headerlink" href="#stack-flow" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Stack Flow. Image credit to <a class="reference external" href="https://www.programiz.com/dsa/stack">programiz</a>.</span><a class="headerlink" href="#stack-flow" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="stack-diagram">
 <a class="reference internal image-reference" href="../_images/stack_diagram.png"><img alt="../_images/stack_diagram.png" src="../_images/stack_diagram.png" style="height: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Stack Diagram.</span><a class="headerlink" href="#stack-diagram" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Stack Diagram. Image credit to <a class="reference external" href="https://dev.to/theoutlander/implementing-the-stack-data-structure-in-javascript-4164">dev.to</a>.</span><a class="headerlink" href="#stack-diagram" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
+<section id="implementing-stack-using-list">
+<h2>Implementing Stack Using List<a class="headerlink" href="#implementing-stack-using-list" title="Permalink to this headline">#</a></h2>
 <section id="python-implementation">
-<h2>Python Implementation<a class="headerlink" href="#python-implementation" title="Permalink to this headline">#</a></h2>
+<h3>Python Implementation<a class="headerlink" href="#python-implementation" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
@@ -571,6 +582,9 @@ the operation called <code class="docutils literal notranslate"><span class="pre
     <span class="sd">&quot;&quot;&quot;Creates a stack that uses python&#39;s default list as the underlying</span>
 <span class="sd">    data structure.</span>
 
+<span class="sd">    Note:</span>
+<span class="sd">        Methods are ordered with dunder/magic/property -&gt; public -&gt; private -&gt; static/class.</span>
+
 <span class="sd">    Attributes:</span>
 <span class="sd">        stack_items (List[T]): The list that stores the items in the stack.</span>
 <span class="sd">            We treat the end of the list as the top of the stack.</span>
@@ -581,10 +595,52 @@ the operation called <code class="docutils literal notranslate"><span class="pre
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_stack_items</span> <span class="o">=</span> <span class="p">[]</span>
 
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the size of the stack.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (int): The size of the stack.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stack_items</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StackList</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Iterate over the stack items.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            If we do not define __next__, we can use</span>
+<span class="sd">            ```</span>
+<span class="sd">            while not self.is_empty():</span>
+<span class="sd">                yield self.pop()</span>
+<span class="sd">            ```</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (StackList[T]): The stack.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the next item in the stack.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (T): The next item in the stack.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">stack_items</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Read only property for the stack items.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stack_items</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the size of the stack.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (int): The size of the stack.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Check if stack is empty.</span>
@@ -594,15 +650,16 @@ the operation called <code class="docutils literal notranslate"><span class="pre
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span>
 
-    <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Push an item on top of the stack.</span>
+    <span class="k">def</span> <span class="nf">peek</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the top most item in the stack without modifying the stack.</span>
 
-<span class="sd">        In this implementation, the item is appended to the end of the list.</span>
+<span class="sd">        This is different from pop in that it does not remove the item from the</span>
+<span class="sd">        stack.</span>
 
-<span class="sd">        Args:</span>
-<span class="sd">            item (T): The current item pushed into the stack.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            (T): The top most item in the stack.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">stack_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack_items</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Pop an item from the top of the stack.</span>
@@ -620,25 +677,15 @@ the operation called <code class="docutils literal notranslate"><span class="pre
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Stack is empty&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack_items</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">peek</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return the top most item in the stack without modifying the stack.</span>
+    <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Push an item on top of the stack.</span>
 
-<span class="sd">        This is different from pop in that it does not remove the item from the</span>
-<span class="sd">        stack.</span>
+<span class="sd">        In this implementation, the item is appended to the end of the list.</span>
 
-<span class="sd">        Returns:</span>
-<span class="sd">            (T): The top most item in the stack.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            item (T): The current item pushed into the stack.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack_items</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return the size of the stack.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            (int): The size of the stack.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stack_items</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stack_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -687,6 +734,7 @@ True
 </div>
 </div>
 </div>
+</section>
 <section id="time-complexity">
 <h3>Time Complexity<a class="headerlink" href="#time-complexity" title="Permalink to this headline">#</a></h3>
 <table class="table" id="id1">
@@ -885,7 +933,7 @@ Popped 30 from the stack
 <section id="further-readings">
 <h2>Further Readings<a class="headerlink" href="#further-readings" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://www.geeksforgeeks.org/introduction-to-stack-data-structure-and-algorithm-tutorials/?ref=lbp">https://www.geeksforgeeks.org/introduction-to-stack-data-structure-and-algorithm-tutorials/?ref=lbp</a></p></li>
+<li><p><a class="reference external" href="https://www.geeksforgeeks.org/introduction-to-stack-data-structure-and-algorithm-tutorials/">https://www.geeksforgeeks.org/introduction-to-stack-data-structure-and-algorithm-tutorials/</a></p></li>
 <li><p><a class="reference external" href="https://runestone.academy/ns/books/published/pythonds3/BasicDS/TheStackAbstractDataType.html">https://runestone.academy/ns/books/published/pythonds3/BasicDS/TheStackAbstractDataType.html</a></p></li>
 </ul>
 </section>
@@ -925,10 +973,10 @@ Popped 30 from the stack
             <p class="prev-next-title">Introduction</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="Questions.html" title="next page">
+    <a class='right-next' id="next-link" href="../queue/Queue.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Questions</p>
+        <p class="prev-next-title">Queue</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
