@@ -20,10 +20,33 @@ class QueueList(Generic[T]):
     def __init__(self) -> None:
         self._queue_items = []
 
+    def __len__(self) -> int:
+        """Return the size of the queue."""
+        return len(self.queue_items)
+
+    def __iter__(self) -> QueueList[T]:
+        """Iterate over the queue items."""
+        return self
+
+    def __next__(self) -> T:
+        """Return the next item in the queue."""
+        if self.is_empty():
+            raise StopIteration
+        return self.dequeue()
+
     @property
     def queue_items(self) -> List[T]:
         """Read only property for the queue items."""
         return self._queue_items
+
+    @property
+    def size(self) -> int:
+        """Return the size of the queue.
+
+        Returns:
+            (int): The size of the queue.
+        """
+        return len(self)
 
     def is_empty(self) -> bool:
         """Check if queue is empty.
@@ -56,17 +79,8 @@ class QueueList(Generic[T]):
             (T): The item at the start of the queue.
         """
         if self.is_empty():
-            raise Exception("Stack is empty")
+            raise Exception("Queue is empty")
         return self.queue_items.pop()
-
-    @property
-    def size(self) -> int:
-        """Return the size of the queue.
-
-        Returns:
-            (int): The size of the queue.
-        """
-        return len(self.queue_items)
 
 
 class DeQueueList(Generic[T]):
@@ -84,10 +98,23 @@ class DeQueueList(Generic[T]):
     def __init__(self) -> None:
         self._queue_items = []
 
+    def __len__(self) -> int:
+        """Return the size of the dequeue."""
+        return len(self.queue_items)
+
     @property
     def queue_items(self) -> List[T]:
         """Read only property for the queue items."""
         return self._queue_items
+
+    @property
+    def size(self) -> int:
+        """Return the size of the queue.
+
+        Returns:
+            (int): The size of the queue.
+        """
+        return len(self)
 
     def is_empty(self) -> bool:
         """Check if queue is empty.
@@ -128,7 +155,7 @@ class DeQueueList(Generic[T]):
             (T): The item at the start of the queue.
         """
         if self.is_empty():
-            raise Exception("Stack is empty")
+            raise Exception("Queue is empty")
         return self.queue_items.pop()
 
     def remove_rear(self) -> T:
@@ -141,14 +168,17 @@ class DeQueueList(Generic[T]):
             (T): The item at the end of the queue.
         """
         if self.is_empty():
-            raise Exception("Stack is empty")
+            raise Exception("Queue is empty")
         return self.queue_items.pop(0)
 
-    @property
-    def size(self) -> int:
-        """Return the size of the queue.
 
-        Returns:
-            (int): The size of the queue.
-        """
-        return len(self.queue_items)
+if __name__ == "__main__":
+    queue = QueueList()
+    queue.enqueue(1)
+    queue.enqueue(2)
+    queue.enqueue(3)
+
+    print(f"Queue size: {queue.size}")
+
+    for item in queue:
+        print(item)

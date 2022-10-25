@@ -23,11 +23,7 @@ class StackList(Generic[T]):
         self._stack_items = []
 
     def __len__(self) -> int:
-        """Return the size of the stack.
-
-        Returns:
-            (int): The size of the stack.
-        """
+        """Return the size of the stack."""
         return len(self.stack_items)
 
     def __iter__(self) -> StackList[T]:
