@@ -1,13 +1,11 @@
-# Table of contents
-# Learn more at https://jupyterbook.org/customize/toc.html
-
 format: jb-book
 root: intro.md
 parts:
   - caption: Stack
     chapters:
       - file: stack/Stack.ipynb
-      - file: stack/Questions.ipynb
+      - file: stack/Valid Parentheses.ipynb
+      - file: stack/Reverse String.ipynb
   - caption: Queue
     chapters:
       - file: queue/Queue.ipynb

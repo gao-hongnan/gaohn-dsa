@@ -12,12 +12,12 @@ This is the documentation for various data structures and algorithms concepts.
 ### Installation
 
 ```bash
-~/gaohn        $ git clone https://github.com/gao-hongnan/gaohn-dsa.git gaohn-dsa
-~/gaohn        $ cd gaohn-dsa
-~/gaohn        $ python -m venv <venv_name> && <venv_name>\Scripts\activate 
-~/gaohn (venv) $ python -m pip install --upgrade pip setuptools wheel
-~/gaohn (venv) $ pip install -r requirements.txt
-~/gaohn (venv) $ pip install myst-nb==0.16.0 
+~/gaohn                  $ git clone https://github.com/gao-hongnan/gaohn-dsa.git gaohn-dsa
+~/gaohn                  $ cd gaohn-dsa
+~/gaohn/gaohn-dsa        $ python -m venv <venv_name> && <venv_name>\Scripts\activate 
+~/gaohn/gaohn-dsa (venv) $ python -m pip install --upgrade pip setuptools wheel
+~/gaohn/gaohn-dsa (venv) $ pip install -r requirements.txt
+~/gaohn/gaohn-dsa (venv) $ pip install myst-nb==0.16.0 
 ```
 
 The reason for manual install of `myst-nb==0.16.0` is because it is not in sync with the current jupyterbook
