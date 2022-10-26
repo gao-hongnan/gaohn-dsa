@@ -118,8 +118,11 @@ if __name__ == "__main__":
     stack.push(3)
     stack.push(4)
     stack.push(5)
+    stack.push(6)
 
     print(f"stack size = {stack.size}")
+
+    print(f"pop = {stack.pop()}")
 
     for item in stack:
         print(item)
