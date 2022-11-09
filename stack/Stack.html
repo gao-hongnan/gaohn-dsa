@@ -157,8 +157,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../queue/Questions.html">
-   Questions
+  <a class="reference internal" href="../queue/Easy%20-%20Hot%20Potatoes.html">
+   Easy - Hot Potatoes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../queue/Easy%20-%20Palindrome%20Checker.html">
+   Easy - Palindrome Checker
   </a>
  </li>
 </ul>
@@ -430,17 +435,17 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
+    <a class="reference internal nav-link" href="#id1">
      Python Implementation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
+    <a class="reference internal nav-link" href="#id2">
      Time Complexity
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
+    <a class="reference internal nav-link" href="#id3">
      Space Complexity
     </a>
    </li>
@@ -503,17 +508,17 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
+    <a class="reference internal nav-link" href="#id1">
      Python Implementation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
+    <a class="reference internal nav-link" href="#id2">
      Time Complexity
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
+    <a class="reference internal nav-link" href="#id3">
      Space Complexity
     </a>
    </li>
@@ -743,8 +748,8 @@ True
 </section>
 <section id="time-complexity">
 <h3>Time Complexity<a class="headerlink" href="#time-complexity" title="Permalink to this headline">#</a></h3>
-<table class="table" id="id1">
-<caption><span class="caption-number">Table 1 </span><span class="caption-text">Time Complexity</span><a class="headerlink" href="#id1" title="Permalink to this table">#</a></caption>
+<table class="table" id="stack-list-time-complexity">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">Time Complexity of Stack Implemented using List</span><a class="headerlink" href="#stack-list-time-complexity" title="Permalink to this table">#</a></caption>
 <colgroup>
 <col style="width: 50%" />
 <col style="width: 50%" />
@@ -778,8 +783,8 @@ these are <span class="math notranslate nohighlight">\(\O(n)\)</span> operations
 <p>We need to think a bit little different from list where you easily visualize a list’s first and last element as the bottom and top of the stack respectively.</p>
 <p>For Linked List, you think of a reversed list. That is to say, the <code class="docutils literal notranslate"><span class="pre">head</span></code> node of the Linked List is the <strong>top</strong> of the stack and the last node (not the <code class="docutils literal notranslate"><span class="pre">None</span></code> node) will be the beginning of the stack.</p>
 <p>Ref: <a class="reference external" href="https://www.geeksforgeeks.org/stack-data-structure-introduction-program/?ref=lbp">https://www.geeksforgeeks.org/stack-data-structure-introduction-program/?ref=lbp</a></p>
-<section id="id2">
-<h3>Python Implementation<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<section id="id1">
+<h3>Python Implementation<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span>
@@ -927,12 +932,12 @@ Popped 30 from the stack
 </div>
 </div>
 </section>
-<section id="id3">
-<h3>Time Complexity<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<section id="id2">
+<h3>Time Complexity<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
 <p>Time complexity: <span class="math notranslate nohighlight">\(\O(1)\)</span> for both <code class="docutils literal notranslate"><span class="pre">push</span></code> and <code class="docutils literal notranslate"><span class="pre">pop</span></code> as no <strong>traversal</strong> is involved.</p>
 </section>
-<section id="id4">
-<h3>Space Complexity<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<section id="id3">
+<h3>Space Complexity<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
 <p>Space complexity: <span class="math notranslate nohighlight">\(\O(n)\)</span>. The space required depends on the number of items stored in the list <code class="docutils literal notranslate"><span class="pre">stack_items</span></code>, so if <code class="docutils literal notranslate"><span class="pre">stack_items</span></code> stores up to <span class="math notranslate nohighlight">\(n\)</span> items, then space complexity is <span class="math notranslate nohighlight">\(\O(n)\)</span>.</p>
 </section>
 </section>

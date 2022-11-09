@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Easy - Reverse String &#8212; Data Structures &amp; Algorithms</title>
+    <title>Easy - Hot Potatoes &#8212; Data Structures &amp; Algorithms</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Queue" href="../queue/Queue.html" />
-    <link rel="prev" title="Easy - Valid Parentheses" href="Easy%20-%20Valid%20Parentheses.html" />
+    <link rel="next" title="Easy - Palindrome Checker" href="Easy%20-%20Palindrome%20Checker.html" />
+    <link rel="prev" title="Double Ended Queue" href="DeQueue.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -123,19 +123,19 @@ const thebe_selector_output = ".output, .cell_output"
   Stack
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="Stack.html">
+  <a class="reference internal" href="../stack/Stack.html">
    Stack
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Easy%20-%20Valid%20Parentheses.html">
+  <a class="reference internal" href="../stack/Easy%20-%20Valid%20Parentheses.html">
    Easy - Valid Parentheses
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../stack/Easy%20-%20Reverse%20String.html">
    Easy - Reverse String
   </a>
  </li>
@@ -145,24 +145,24 @@ const thebe_selector_output = ".output, .cell_output"
   Queue
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../queue/Queue.html">
+  <a class="reference internal" href="Queue.html">
    Queue
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../queue/DeQueue.html">
+  <a class="reference internal" href="DeQueue.html">
    Double Ended Queue
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../queue/Easy%20-%20Hot%20Potatoes.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Easy - Hot Potatoes
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../queue/Easy%20-%20Palindrome%20Checker.html">
+  <a class="reference internal" href="Easy%20-%20Palindrome%20Checker.html">
    Easy - Palindrome Checker
   </a>
  </li>
@@ -237,7 +237,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/gao-hongnan/gaohn-dsa/main?urlpath=tree/content/stack/Easy - Reverse String.ipynb"
+        <a href="https://mybinder.org/v2/gh/gao-hongnan/gaohn-dsa/main?urlpath=tree/content/queue/Easy - Hot Potatoes.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -255,7 +255,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/gao-hongnan/gaohn-dsa/blob/main/content/stack/Easy - Reverse String.ipynb"
+        <a href="https://colab.research.google.com/github/gao-hongnan/gaohn-dsa/blob/main/content/queue/Easy - Hot Potatoes.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -315,7 +315,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/gao-hongnan/gaohn-dsa/issues/new?title=Issue%20on%20page%20%2Fstack/Easy - Reverse String.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/gao-hongnan/gaohn-dsa/issues/new?title=Issue%20on%20page%20%2Fqueue/Easy - Hot Potatoes.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -343,7 +343,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/stack/Easy - Reverse String.ipynb"
+        <a href="../_sources/queue/Easy - Hot Potatoes.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -436,7 +436,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Easy - Reverse String</h1>
+                <h1>Easy - Hot Potatoes</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -481,59 +481,77 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="easy-reverse-string">
-<h1>Easy - Reverse String<a class="headerlink" href="#easy-reverse-string" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="easy-hot-potatoes">
+<h1>Easy - Hot Potatoes<a class="headerlink" href="#easy-hot-potatoes" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span>
 
-<span class="kn">from</span> <span class="nn">dsa.stack</span> <span class="kn">import</span> <span class="n">StackList</span>
+<span class="kn">from</span> <span class="nn">dsa.queue</span> <span class="kn">import</span> <span class="n">QueueList</span>
 </pre></div>
 </div>
 </div>
 </div>
 <section id="problem">
 <h2>Problem<a class="headerlink" href="#problem" title="Permalink to this headline">#</a></h2>
-<p>Write a function <code class="docutils literal notranslate"><span class="pre">reverse_string_using_stack(string)</span></code> that uses a stack to reverse the characters in a string.</p>
+<p><a class="reference external" href="https://runestone.academy/ns/books/published/pythonds3/BasicDS/SimulationHotPotato.html">Question details can be found here</a>.</p>
 </section>
 <section id="constraints-and-assumptions">
 <h2>Constraints and Assumptions<a class="headerlink" href="#constraints-and-assumptions" title="Permalink to this headline">#</a></h2>
-<p>Placeholder for now.</p>
+<p>Placeholder.</p>
 </section>
 <section id="implementation">
 <h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">num</span> <span class="pre">=</span> <span class="pre">5</span></code> means when the counter reaches 5, the person holding the potato will be eliminated.</p></li>
+<li><p>d, c, b, a (a is the first in queue and he holds the potato, counter starts at 0)</p></li>
+<li><p>a, d, c, b (b holds the potato, counter is 1)</p></li>
+<li><p>b, a, d, c (c holds the potato, counter is 2)</p></li>
+<li><p>c, b, a, d (d holds the potato, counter is 3)</p></li>
+<li><p>d, c, b, a (a holds the potato, counter is 4)</p></li>
+<li><p>a, d, c, b (b holds the potato, counter is 5, b is eliminated)</p></li>
+</ul>
+<figure class="align-default" id="hot-potato">
+<img alt="../_images/hot_potato.jpg" src="../_images/hot_potato.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Hot Potato elimination diagram, with 4 people and num set to 5.</span><a class="headerlink" href="#hot-potato" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="n">stack</span><span class="p">:</span> <span class="n">StackList</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">StackList</span><span class="p">)</span>
+    <span class="n">counter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">q</span><span class="p">:</span> <span class="n">QueueList</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">QueueList</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">reverse_string_using_stack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Reverse a string using stack.&quot;&quot;&quot;</span>
-        <span class="n">reversed_string</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">hot_potato</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">first_in_q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">first_in_q</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">string</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">==</span> <span class="n">num</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># reset</span>
 
-        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
-            <span class="n">reversed_string</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="n">reversed_string</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>Note <code class="docutils literal notranslate"><span class="pre">[&quot;Bill&quot;,</span> <span class="pre">&quot;David&quot;,</span> <span class="pre">&quot;Susan&quot;,</span> <span class="pre">&quot;Jane&quot;]</span></code> means Bill is first in queue.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">string</span> <span class="o">=</span> <span class="s2">&quot;abcdefg&quot;</span>
-<span class="n">expected</span> <span class="o">=</span> <span class="s2">&quot;gfedcba&quot;</span>
-
-<span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">reverse_string_using_stack</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">hot_potato</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Bill&quot;</span><span class="p">,</span> <span class="s2">&quot;David&quot;</span><span class="p">,</span> <span class="s2">&quot;Susan&quot;</span><span class="p">,</span> <span class="s2">&quot;Jane&quot;</span><span class="p">],</span> <span class="n">num</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span> <span class="c1"># Susan</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Susan
 </pre></div>
 </div>
 </div>
@@ -541,18 +559,22 @@ title="Print to PDF"
 </section>
 <section id="time-complexity">
 <h2>Time Complexity<a class="headerlink" href="#time-complexity" title="Permalink to this headline">#</a></h2>
-<p>Assume the string has length <span class="math notranslate nohighlight">\(n\)</span>.</p>
-<p>From <a class="reference internal" href="Stack.html#stack-list-time-complexity"><span class="std std-ref">Time Complexity of Stack Implemented using List</span></a>, operations such as <code class="docutils literal notranslate"><span class="pre">push</span></code>, <code class="docutils literal notranslate"><span class="pre">pop</span></code>, <code class="docutils literal notranslate"><span class="pre">is_empty()</span></code> and <code class="docutils literal notranslate"><span class="pre">+=</span></code> here are all <span class="math notranslate nohighlight">\(\O(1)\)</span>.</p>
-<p>And since we traverse the given string one character at a time for at most <span class="math notranslate nohighlight">\(n\)</span> times, then the time complexity is</p>
-<div class="math notranslate nohighlight">
-\[
-\O(1) \times n \approx \O(n)
-\]</div>
+<p>Assume the input <code class="docutils literal notranslate"><span class="pre">names</span></code> to be a list of length <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>From <a class="reference internal" href="Queue.html#queue-list-time-complexity"><span class="std std-ref">Time Complexity of Queue Implemented using List</span></a>, <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> is of <span class="math notranslate nohighlight">\(\O(1)\)</span> since it uses <code class="docutils literal notranslate"><span class="pre">pop</span></code> while <code class="docutils literal notranslate"><span class="pre">enqueue</span></code> is <span class="math notranslate nohighlight">\(\O(n)\)</span>
+since it uses <code class="docutils literal notranslate"><span class="pre">insert</span></code>.</p>
+<p>And since we traverse the given list once to <code class="docutils literal notranslate"><span class="pre">enqueue</span></code> first, we would already have <span class="math notranslate nohighlight">\(n\)</span> times of <code class="docutils literal notranslate"><span class="pre">enqueue</span></code> which is <span class="math notranslate nohighlight">\(\O(n) \times n \approx \O(n^2)\)</span><a class="footnote-reference brackets" href="#ntimeso-n" id="id1">1</a>.</p>
+<p>Subsequently, we enter a while loop, which at worst can take <span class="math notranslate nohighlight">\(n\)</span> iterations, which eventually leads to <span class="math notranslate nohighlight">\(\O(n^2) + \O(n^2) + \O(n) \approx \O(n^2)\)</span>.</p>
 </section>
 <section id="space-complexity">
 <h2>Space Complexity<a class="headerlink" href="#space-complexity" title="Permalink to this headline">#</a></h2>
-<p>Assume the string has length <span class="math notranslate nohighlight">\(n\)</span>.</p>
-<p>The space complexity is at most <span class="math notranslate nohighlight">\(\O(n)\)</span> as we are just maintaining a stack with at most <span class="math notranslate nohighlight">\(n\)</span> elements pushed in.</p>
+<p>Assume the queue <code class="docutils literal notranslate"><span class="pre">q</span></code> has length <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>The space complexity is at most <span class="math notranslate nohighlight">\(\O(n)\)</span> as we are just maintaining a queue with at most <span class="math notranslate nohighlight">\(n\)</span> elements inside.</p>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="ntimeso-n"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Note it is not trivial that <span class="math notranslate nohighlight">\(n \times \O(n) \approx \O(n^2)\)</span>, but for now we treat this result as proven. You can think of it <a class="reference external" href="https://stackoverflow.com/questions/3449441/big-oh-how-can-on-on-on-be-equal-to-on2">this way</a>, if you do something which will take <span class="math notranslate nohighlight">\(N\)</span> seconds, and repeat that <span class="math notranslate nohighlight">\(N\)</span> times. How many seconds will it take to finish?</p>
+</dd>
+</dl>
 </section>
 </section>
 
@@ -569,7 +591,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./stack"
+            path: "./queue"
         },
         predefinedOutput: true
     }
@@ -583,17 +605,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Easy%20-%20Valid%20Parentheses.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="DeQueue.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Easy - Valid Parentheses</p>
+            <p class="prev-next-title">Double Ended Queue</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../queue/Queue.html" title="next page">
+    <a class='right-next' id="next-link" href="Easy%20-%20Palindrome%20Checker.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Queue</p>
+        <p class="prev-next-title">Easy - Palindrome Checker</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
