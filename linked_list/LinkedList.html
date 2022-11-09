@@ -453,11 +453,6 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#linked-list-walkthrough">
-   Linked List Walkthrough
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
    References
   </a>
@@ -531,11 +526,6 @@ title="Print to PDF"
     </ul>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#linked-list-walkthrough">
-   Linked List Walkthrough
-  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
@@ -813,7 +803,7 @@ the <code class="docutils literal notranslate"><span class="pre">head</span></co
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>head          :    Node(curr_node_value=1, next_node=Node(curr_node_value=2, next_node=Node(curr_node_value=3, next_node=None))), 
 temp_node     :    Node(curr_node_value=2, next_node=Node(curr_node_value=3, next_node=None))
-140581873829200 140581873829104 140581873829104
+139792813368224 139792813368128 139792813368128
 </pre></div>
 </div>
 </div>
@@ -850,13 +840,43 @@ temp_node     :    Node(curr_node_value=2, next_node=Node(curr_node_value=3, nex
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node(curr_node_value=3, next_node=None)
 head          :    Node(curr_node_value=1, next_node=Node(curr_node_value=2, next_node=Node(curr_node_value=3, next_node=Node(curr_node_value=4, next_node=None)))), 
 temp_node     :    Node(curr_node_value=3, next_node=Node(curr_node_value=4, next_node=None))
-140581873829968 140581873830112 140581873830112
+139792813369232 139792813369376 139792813369376
 </pre></div>
 </div>
 </div>
 </div>
 <p>Note we traversed twice now since we need to two steps for <code class="docutils literal notranslate"><span class="pre">temp_node</span></code> to reach <code class="docutils literal notranslate"><span class="pre">Node(curr_node_value=3,</span> <span class="pre">next_node=None)</span></code>.</p>
 <p>One important thing to realize is that assigning attribute to <code class="docutils literal notranslate"><span class="pre">temp_node</span></code> will change <code class="docutils literal notranslate"><span class="pre">head</span></code> too.</p>
+<p>You also need the temporary <code class="docutils literal notranslate"><span class="pre">temp</span></code> because if you just use <code class="docutils literal notranslate"><span class="pre">head</span></code> directly, then the <code class="docutils literal notranslate"><span class="pre">head</span></code> will be forever lost.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">second</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">third</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">ll</span> <span class="o">=</span> <span class="n">SinglyLinkedList</span><span class="p">()</span>
+<span class="n">ll</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">first</span>
+<span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">second</span>
+
+<span class="c1"># if we want to add 3, we can do</span>
+<span class="c1"># ll.head.next_node.next_node = third</span>
+<span class="c1"># or we can do it on temp.</span>
+
+<span class="n">ll</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span>  <span class="c1"># temp_node is now 2 -&gt; None and is ll.head.next_node</span>
+<span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">third</span>  <span class="c1"># this is equivalent to ll.head.next_node.next_node = third</span>
+
+<span class="c1"># Note we just traverse once since our end goal is for temp_node to be the last node.</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;head          :    </span><span class="si">{</span><span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>head          :    Node(curr_node_value=2, next_node=Node(curr_node_value=3, next_node=None))
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="append">
 <h4>Append<a class="headerlink" href="#append" title="Permalink to this headline">#</a></h4>
@@ -1102,165 +1122,14 @@ None
 </section>
 </section>
 </section>
-<section id="linked-list-walkthrough">
-<h2>Linked List Walkthrough<a class="headerlink" href="#linked-list-walkthrough" title="Permalink to this headline">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="o">*</span>
-
-<span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
-    <span class="n">curr_node_value</span><span class="p">:</span> <span class="n">Any</span>
-    <span class="c1"># next_node: self</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">curr_node_value</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="c1"># a node can hold a current value and by default its next node is None</span>
-        <span class="c1"># however we can assign values to the next of a node, but the next must be of object node as denoted</span>
-        <span class="c1"># note the distinction between curr node value and next node, they are diff</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">curr_node_value</span> <span class="o">=</span> <span class="n">curr_node_value</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="kc">None</span>
-
-<span class="k">class</span> <span class="nc">LinkedList</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># key point is that end of every llist, it points to None always</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="kc">None</span>
-        
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">add_node_before_head</span><span class="p">(</span><span class="n">head_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">node_value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
-        <span class="c1"># if you set head_node to self.head</span>
-        <span class="c1"># first = Node(1)</span>
-        <span class="c1"># second = Node(2)</span>
-        <span class="c1"># third = Node(3)</span>
-        
-        <span class="c1"># ll = LinkedList()</span>
-        <span class="c1"># ll.head = first</span>
-        <span class="c1"># ll.head.next_node = second</span>
-        <span class="c1"># ll.head.next_node.next_node = third</span>
-        
-        <span class="c1"># ll.add_node_before_head(0)</span>
-        
-        <span class="c1"># if you do these above, it won&#39;t get you 0123None, it gives 0None</span>
-        <span class="c1"># because we are referring to self.head in this code block and self.head is None</span>
-        <span class="c1"># therefore for clarity of my learning, I will do all staticmethods first then internalize one day.</span>
-        
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Before inserting in the beginning&quot;</span><span class="p">)</span>
-        <span class="n">LinkedList</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">head_node</span><span class="p">)</span>
-        <span class="n">new_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">node_value</span><span class="p">)</span>
-        <span class="n">new_node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">head_node</span>
-        <span class="n">head_node</span><span class="o">=</span> <span class="n">new_node</span> 
-        
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After inserting in the beginning&quot;</span><span class="p">)</span>
-        <span class="n">LinkedList</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">head_node</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">head_node</span>
-        
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">add_node_after_node</span><span class="p">(</span><span class="n">prev_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">node_value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="n">prev_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;There should be a previous node in the given LinkedList!&quot;</span>
-        <span class="n">next_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">node_value</span><span class="p">)</span>
-        <span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">prev_node</span><span class="o">.</span><span class="n">next_node</span>
-        <span class="n">prev_node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">next_node</span>
-        <span class="n">LinkedList</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">prev_node</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">prev_node</span>
-        
-        
-    <span class="c1"># def add_single_node(self, node_value: Any) -&gt; Node:</span>
-    <span class="c1">#     if self.head is None:</span>
-    <span class="c1">#         self.head = Node(node_value)</span>
-    <span class="c1">#     else:</span>
-    <span class="c1">#         self.head.next_node = Node(node_value)</span>
-        
-    <span class="k">def</span> <span class="nf">add_multiple_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_of_node_values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]):</span>
-        <span class="k">for</span> <span class="n">node_value</span> <span class="ow">in</span> <span class="n">list_of_node_values</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">node_value</span>
-        
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">head_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">):</span>
-        <span class="c1"># stay true to the idea of having None as the &quot;last last Node&quot;</span>
-        <span class="n">temp</span> <span class="o">=</span> <span class="n">head_node</span>
-        
-        <span class="k">while</span> <span class="n">temp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">curr_node_value</span><span class="p">)</span>
-            <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">next_node</span>
-            <span class="k">if</span> <span class="n">temp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;None&quot;</span><span class="p">)</span>
-                
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">head_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Traverse current head node:&quot;</span><span class="p">)</span>
-        <span class="bp">cls</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">head_node</span><span class="p">)</span>
-        
-        <span class="n">prev_node</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="n">curr_node</span> <span class="o">=</span> <span class="n">head_node</span>
-            
-        <span class="k">while</span> <span class="n">curr_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">temp</span> <span class="o">=</span> <span class="n">curr_node</span>
-            <span class="n">curr_node</span> <span class="o">=</span> <span class="n">curr_node</span><span class="o">.</span><span class="n">next_node</span>
-            <span class="n">temp</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">prev_node</span>
-            <span class="n">prev_node</span> <span class="o">=</span> <span class="n">temp</span>
-        
-        <span class="n">reversed_head_node</span> <span class="o">=</span> <span class="n">prev_node</span>
-        
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Traverse reversed head node:&quot;</span><span class="p">)</span>
-        <span class="bp">cls</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">reversed_head_node</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">reversed_head_node</span>
-    
-
-<span class="c1"># to be more clear we isolate the reverse linked list fn</span>
-<span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="n">head</span><span class="p">):</span>
-
-    <span class="n">prev_node</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">curr_node</span> <span class="o">=</span> <span class="n">head</span>
-        
-    <span class="k">while</span> <span class="n">curr_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">temp</span> <span class="o">=</span> <span class="n">curr_node</span>
-        <span class="n">curr_node</span> <span class="o">=</span> <span class="n">curr_node</span><span class="o">.</span><span class="n">next_node</span>
-        <span class="n">temp</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">prev_node</span>
-        <span class="n">prev_node</span> <span class="o">=</span> <span class="n">temp</span>
-    
-    <span class="n">reversed_head_node</span> <span class="o">=</span> <span class="n">prev_node</span>
-
-    <span class="k">return</span> <span class="n">reversed_head_node</span>
-
-    
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">first</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">second</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">third</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-    
-    <span class="n">ll</span> <span class="o">=</span> <span class="n">LinkedList</span><span class="p">()</span>
-    <span class="n">ll</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">first</span>
-    <span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">second</span>
-    <span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">third</span>
-    
-    <span class="c1"># ll.add_node_before_head(ll.head, 0)</span>
-    
-    <span class="n">ll</span><span class="o">.</span><span class="n">reverse</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
-    
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Traverse current head node:
-1
-2
-3
-None
-Traverse reversed head node:
-3
-2
-1
-None
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.geeksforgeeks.org/linked-list-set-1-introduction/?ref=lbp">Linked List | Set 1 (Introduction) (GeeksforGeeks)</a></p></li>
 <li><p><a class="reference external" href="https://www.youtube.com/watch?v=XDO6I8jxHtA">Amazon Coding Interview Question: Reverse a Linked List (Leetcode 206 in Python)</a></p></li>
 <li><p><a class="reference external" href="https://towardsdatascience.com/python-linked-lists-c3622205da81">How to Implement a Linked List in Python</a></p></li>
-<li><p><a class="reference external" href="https://realpython.com/linked-lists-python/#how-to-create-a-linked-list">https://realpython.com/linked-lists-python/#how-to-create-a-linked-list</a></p></li>
+<li><p><a class="reference external" href="https://realpython.com/linked-lists-python">https://realpython.com/linked-lists-python</a></p></li>
+<li><p><a class="reference external" href="https://runestone.academy/ns/books/published/pythonds3/BasicDS/ImplementinganUnorderedListLinkedLists.html">https://runestone.academy/ns/books/published/pythonds3/BasicDS/ImplementinganUnorderedListLinkedLists.html</a></p></li>
 </ul>
 </section>
 </section>
