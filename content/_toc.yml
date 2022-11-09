@@ -10,7 +10,8 @@ parts:
     chapters:
       - file: queue/Queue.ipynb
       - file: queue/DeQueue.ipynb
-      - file: queue/Questions.ipynb
+      - file: queue/Easy - Hot Potatoes.ipynb
+      - file: queue/Easy - Palindrome Checker.ipynb
   - caption: Linked List
     chapters:
       - file: linked_list/LinkedList.ipynb
