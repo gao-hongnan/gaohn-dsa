@@ -486,7 +486,7 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span>
 
-<span class="kn">from</span> <span class="nn">dsa.queue</span> <span class="kn">import</span> <span class="n">QueueList</span>
+<span class="kn">from</span> <span class="nn">dsa.queue</span> <span class="kn">import</span> <span class="n">DeQueueList</span>
 </pre></div>
 </div>
 </div>
@@ -501,90 +501,38 @@ title="Print to PDF"
 </section>
 <section id="implementation">
 <h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">num</span> <span class="pre">=</span> <span class="pre">5</span></code> means when the counter reaches 5, the person holding the potato will be eliminated.</p></li>
-<li><p>d, c, b, a (a is the first in queue and he holds the potato, counter starts at 0)</p></li>
-<li><p>a, d, c, b (b holds the potato, counter is 1)</p></li>
-<li><p>b, a, d, c (c holds the potato, counter is 2)</p></li>
-<li><p>c, b, a, d (d holds the potato, counter is 3)</p></li>
-<li><p>d, c, b, a (a holds the potato, counter is 4)</p></li>
-<li><p>a, d, c, b (b holds the potato, counter is 5, b is eliminated)</p></li>
-</ul>
-<figure class="align-default" id="hot-potato">
-<img alt="../_images/hot_potato.jpg" src="../_images/hot_potato.jpg" />
-<figcaption>
-<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Hot Potato elimination diagram, with 4 people and num set to 5.</span><a class="headerlink" href="#hot-potato" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">str_1</span> <span class="o">=</span> <span class="s2">&quot;radar&quot;</span>
-<span class="n">str_2</span> <span class="o">=</span> <span class="s2">&quot;lsdkjfskf&quot;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">check_palindrome</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="n">deque</span><span class="p">:</span> <span class="n">DeQueueList</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">DeQueueList</span><span class="p">()</span>
-
-    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">string</span><span class="p">:</span>
-        <span class="n">deque</span><span class="o">.</span><span class="n">add_rear</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>  <span class="c1"># enqueue</span>
-
-    <span class="k">while</span> <span class="n">deque</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">front</span> <span class="o">=</span> <span class="n">deque</span><span class="o">.</span><span class="n">remove_front</span><span class="p">()</span>
-        <span class="n">rear</span> <span class="o">=</span> <span class="n">deque</span><span class="o">.</span><span class="n">remove_rear</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">front</span> <span class="o">!=</span> <span class="n">rear</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">False</span>
-
-    <span class="c1"># if deque.size = 1 then it must be true</span>
-    <span class="k">return</span> <span class="kc">True</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">check_palindrome</span><span class="p">(</span><span class="n">str_1</span><span class="p">),</span> <span class="n">check_palindrome</span><span class="p">(</span><span class="n">str_2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="n">counter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">q</span><span class="p">:</span> <span class="n">QueueList</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">QueueList</span><span class="p">)</span>
+    <span class="n">deque</span><span class="p">:</span> <span class="n">DeQueueList</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">DeQueueList</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">hot_potato</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-            
-        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">first_in_q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">first_in_q</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">check_palindrome</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">string</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">deque</span><span class="o">.</span><span class="n">add_rear</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>  <span class="c1"># enqueue</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">==</span> <span class="n">num</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># reset</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">deque</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">front</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deque</span><span class="o">.</span><span class="n">remove_front</span><span class="p">()</span>
+            <span class="n">rear</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deque</span><span class="o">.</span><span class="n">remove_rear</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">front</span> <span class="o">!=</span> <span class="n">rear</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="c1"># if deque.size = 1 then it must be true</span>
+        <span class="k">return</span> <span class="kc">True</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Note <code class="docutils literal notranslate"><span class="pre">[&quot;Bill&quot;,</span> <span class="pre">&quot;David&quot;,</span> <span class="pre">&quot;Susan&quot;,</span> <span class="pre">&quot;Jane&quot;]</span></code> means Bill is first in queue.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">hot_potato</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Bill&quot;</span><span class="p">,</span> <span class="s2">&quot;David&quot;</span><span class="p">,</span> <span class="s2">&quot;Susan&quot;</span><span class="p">,</span> <span class="s2">&quot;Jane&quot;</span><span class="p">],</span> <span class="n">num</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span> <span class="c1"># Susan</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">str_1</span> <span class="o">=</span> <span class="s2">&quot;radar&quot;</span>
+<span class="n">str_2</span> <span class="o">=</span> <span class="s2">&quot;lsdkjfskf&quot;</span>
+
+<span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">check_palindrome</span><span class="p">(</span><span class="n">str_1</span><span class="p">),</span> <span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">check_palindrome</span><span class="p">(</span><span class="n">str_2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Susan
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(True, False)
 </pre></div>
 </div>
 </div>

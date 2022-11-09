@@ -407,14 +407,31 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#linked-list-object">
-   Linked List Object
+  <a class="reference internal nav-link" href="#singly-linked-list">
+   Singly Linked List
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#base-class">
      Base Class
     </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#append-using-head-and-temp-node-pointers">
+     Append using Head and Temp Node Pointers
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#confusion-of-temp-pointer">
+       Confusion of Temp Pointer
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#append">
+       Append
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#traversing-a-linked-list">
@@ -470,14 +487,31 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#linked-list-object">
-   Linked List Object
+  <a class="reference internal nav-link" href="#singly-linked-list">
+   Singly Linked List
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#base-class">
      Base Class
     </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#append-using-head-and-temp-node-pointers">
+     Append using Head and Temp Node Pointers
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#confusion-of-temp-pointer">
+       Confusion of Temp Pointer
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#append">
+       Append
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#traversing-a-linked-list">
@@ -535,7 +569,7 @@ title="Print to PDF"
 </div>
 <section id="node-object">
 <h2>Node Object<a class="headerlink" href="#node-object" title="Permalink to this headline">#</a></h2>
-<p>We create the <code class="docutils literal notranslate"><span class="pre">Node</span></code> object below. This object is currently going to be used for Singly Linked List.</p>
+<p>We create the <code class="docutils literal notranslate"><span class="pre">Node</span></code> object below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -546,77 +580,90 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>One thing for me to visualize is the <code class="docutils literal notranslate"><span class="pre">Node</span></code> object is not just a single object. If we are talking about one node, then our node object should hold a <code class="docutils literal notranslate"><span class="pre">curr_node_value</span></code> and the <code class="docutils literal notranslate"><span class="pre">next_node</span></code> attribute should point to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
-<p>If the <code class="docutils literal notranslate"><span class="pre">Node</span></code> object holds more than one node, then we can imagine the whole <code class="docutils literal notranslate"><span class="pre">Node</span></code> object as a series of nodes. We can only access the nodes sequentially, starting from the first node.</p>
+<p>One thing for me to visualize is the <code class="docutils literal notranslate"><span class="pre">Node</span></code> object is not just a single object.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">Node</span></code> object holds a single node, then our node object should hold a <code class="docutils literal notranslate"><span class="pre">curr_node_value</span></code> and the <code class="docutils literal notranslate"><span class="pre">next_node</span></code> attribute should point to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">Node</span></code> object holds more than one node, then we can imagine the whole <code class="docutils literal notranslate"><span class="pre">Node</span></code> object as a <strong>series of nodes</strong>. We can only access the nodes <strong>sequentially</strong>, starting from the first node.</p>
 <img src="https://storage.googleapis.com/reighns/reighns_ml_projects/docs/data_structures_and_algorithms/linked_list/nodes.png" style="margin-left:auto; margin-right:auto"/>
 <p style="text-align: center">
-    <b>Nodes</b>
-</p><div class="cell docutils container">
+    <b>Node object with 1 node and 2 nodes, respectively.</b>
+</p><p>Create a <code class="docutils literal notranslate"><span class="pre">Node</span></code> object with a single value 1.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">curr_node_value</span><span class="p">)</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">next_node</span><span class="p">)</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">curr_node_value</span><span class="p">)</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">curr_node_value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">next_node</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
 None
-2
+</pre></div>
+</div>
+</div>
+</div>
+<p>Assign another value to the next node of the <code class="docutils literal notranslate"><span class="pre">Node</span></code> object, now this <code class="docutils literal notranslate"><span class="pre">Node</span></code> has 2 values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">curr_node_value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
 None
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="linked-list-object">
-<h2>Linked List Object<a class="headerlink" href="#linked-list-object" title="Permalink to this headline">#</a></h2>
+<section id="singly-linked-list">
+<h2>Singly Linked List<a class="headerlink" href="#singly-linked-list" title="Permalink to this headline">#</a></h2>
 <section id="base-class">
 <h3>Base Class<a class="headerlink" href="#base-class" title="Permalink to this headline">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">head</span></code> node (the first node) of a <strong>Linked List</strong> is of a <code class="docutils literal notranslate"><span class="pre">Node</span></code> object. The <code class="docutils literal notranslate"><span class="pre">head</span></code> <strong>entirely determines</strong> the entirety of the whole <strong>Linked List</strong>. Why?</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">head</span></code> node (the first node) of a <strong>Linked List</strong> is of a <code class="docutils literal notranslate"><span class="pre">Node</span></code> object.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">head</span></code> <strong>entirely determines</strong> the entirety of the whole <strong>Linked List</strong>. Why?</p>
 <p>Because knowing the head node of the <strong>Linked List</strong>, we will be able to know every single node that comes after it sequentially (if exists).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LinkedList</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    The LinkedList object is initialized with a head node.</span>
-
-<span class="sd">    The `head` node (the first node) of a **Linked List** is of a `Node` object.</span>
-<span class="sd">    The `head` **entirely determines** the entirety of the whole **Linked List**. </span>
-<span class="sd">    Because knowing the head node of the **Linked List**, we will be able to know every single node that comes after it sequentially (if exists).</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        head (Node): The head node of the linked list.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">head</span><span class="p">:</span> <span class="n">Node</span> <span class="o">=</span> <span class="kc">None</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SinglyLinkedList</span><span class="p">:</span>
+    <span class="n">head</span><span class="p">:</span> <span class="n">Node</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="kc">None</span>
+        
+    <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="ow">is</span> <span class="kc">None</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Let us walk through how to create a <strong>Linked List</strong>.</p>
+<p>Let us walk through how to add items to a <strong>Linked List</strong>.</p>
 <ol class="simple">
 <li><p>Start with an empty linked list object. The head of the linked list is None.</p></li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">llist</span> <span class="o">=</span> <span class="n">LinkedList</span><span class="p">()</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1</span>
+<span class="n">llist</span> <span class="o">=</span> <span class="n">SinglyLinkedList</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+</div>
 <ol class="simple">
-<li><p>We create 3 <code class="docutils literal notranslate"><span class="pre">Node</span></code> objects as of now, these 3 node object holds value of 1, 2 and 3 respectively. They are not linked, which can be verified by printing <code class="docutils literal notranslate"><span class="pre">.next</span></code> which returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p>We create 3 individual <code class="docutils literal notranslate"><span class="pre">Node</span></code> objects as of now, these 3 node object holds value of 1, 2 and 3 respectively. They are not linked, which can be verified by printing <code class="docutils literal notranslate"><span class="pre">.next</span></code> which returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">first_node</span><span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2</span>
+<span class="n">first_node</span><span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">second_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">third_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 <ol>
 <li><p>Now we assign the first node object <code class="docutils literal notranslate"><span class="pre">first_node</span> <span class="pre">=</span> <span class="pre">Node(1)</span></code> to the <code class="docutils literal notranslate"><span class="pre">head</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">llist</span></code> object. We further note that both <code class="docutils literal notranslate"><span class="pre">first_node</span></code> and <code class="docutils literal notranslate"><span class="pre">llist.head</span></code> now point to the same object and both are of type <code class="docutils literal notranslate"><span class="pre">Node</span></code> and each of them holds a <code class="docutils literal notranslate"><span class="pre">value</span></code> of <span class="math notranslate nohighlight">\(1\)</span>. We also have to be clear that we did not link the head (first) node to the next (second) node yet.</p>
@@ -626,12 +673,24 @@ None
     \]</div>
 </li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">llist</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">first_node</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3</span>
+<span class="n">llist</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">first_node</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
 
 <span class="k">assert</span> <span class="nb">id</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">first_node</span><span class="p">)</span>
 <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="n">Node</span><span class="p">)</span> <span class="o">==</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">first_node</span><span class="p">,</span> <span class="n">Node</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">curr_node_value</span> <span class="o">==</span> <span class="n">first_node</span><span class="o">.</span><span class="n">curr_node_value</span> <span class="o">==</span> <span class="mi">1</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node(curr_node_value=1, next_node=None)
+</pre></div>
+</div>
+</div>
 </div>
 <ol>
 <li><p>We now link the first node with the second by populating the <code class="docutils literal notranslate"><span class="pre">next_node</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">head</span></code> of the linked list <code class="docutils literal notranslate"><span class="pre">llist</span></code> (i.e. <code class="docutils literal notranslate"><span class="pre">llist.head.next_node</span> <span class="pre">=</span> <span class="pre">second_node</span></code>).</p>
@@ -643,6 +702,27 @@ None
     \]</div>
 <p>So to reiterate, our linked list <code class="docutils literal notranslate"><span class="pre">llist</span></code> at this stage is akin to a list <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2]</span></code>. To access the first value of the linked list we can do <code class="docutils literal notranslate"><span class="pre">llist.head.curr_node_value</span></code> and to get the next value we can call <code class="docutils literal notranslate"><span class="pre">llist.head.next_node.curr_node_value</span></code>.</p>
 </li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 4</span>
+<span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">second_node</span><span class="p">;</span> <span class="c1"># Link first node with second</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="nb">id</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">second_node</span><span class="p">)</span>
+<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="p">,</span> <span class="n">Node</span><span class="p">)</span> <span class="o">==</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">second_node</span><span class="p">,</span> <span class="n">Node</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">curr_node_value</span> <span class="o">==</span> <span class="n">second_node</span><span class="o">.</span><span class="n">curr_node_value</span> <span class="o">==</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node(curr_node_value=1, next_node=Node(curr_node_value=2, next_node=None))
+</pre></div>
+</div>
+</div>
+</div>
+<ol>
 <li><p>We now link the second node with the third by populating the <code class="docutils literal notranslate"><span class="pre">next_node</span></code> attribute of the second node of the linked list <code class="docutils literal notranslate"><span class="pre">llist</span></code>, but to do so, we must actually reach the second node. (i.e. <code class="docutils literal notranslate"><span class="pre">llist.head.next_node.next_node</span> <span class="pre">=</span> <span class="pre">third_node</span></code>).</p>
 <p>We further note that both <code class="docutils literal notranslate"><span class="pre">llist.head.next_node.next_node</span></code> and <code class="docutils literal notranslate"><span class="pre">third_node</span></code> now point to the same object and both are of type <code class="docutils literal notranslate"><span class="pre">Node</span></code> and each of them holds a <code class="docutils literal notranslate"><span class="pre">curr_node_value</span></code> of <span class="math notranslate nohighlight">\(3\)</span>.</p>
 <p>Now the linked list <code class="docutils literal notranslate"><span class="pre">llist</span></code> has connected the second node and the third node in a linear fashion:</p>
@@ -655,30 +735,10 @@ None
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1</span>
-<span class="n">llist</span> <span class="o">=</span> <span class="n">LinkedList</span><span class="p">()</span>
-
-<span class="c1"># 2</span>
-<span class="n">first_node</span><span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">second_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">third_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-
-<span class="c1"># 3</span>
-<span class="n">llist</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">first_node</span>
-
-<span class="k">assert</span> <span class="nb">id</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">first_node</span><span class="p">)</span>
-<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="n">Node</span><span class="p">)</span> <span class="o">==</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">first_node</span><span class="p">,</span> <span class="n">Node</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">curr_node_value</span> <span class="o">==</span> <span class="n">first_node</span><span class="o">.</span><span class="n">curr_node_value</span> <span class="o">==</span> <span class="mi">1</span>
-
-<span class="c1"># 4</span>
-<span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">second_node</span><span class="p">;</span> <span class="c1"># Link first node with second</span>
-
-<span class="k">assert</span> <span class="nb">id</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">second_node</span><span class="p">)</span>
-<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="p">,</span> <span class="n">Node</span><span class="p">)</span> <span class="o">==</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">second_node</span><span class="p">,</span> <span class="n">Node</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">curr_node_value</span> <span class="o">==</span> <span class="n">second_node</span><span class="o">.</span><span class="n">curr_node_value</span> <span class="o">==</span> <span class="mi">2</span>
-
-<span class="c1"># 5</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 5</span>
 <span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">third_node</span><span class="p">;</span> <span class="c1"># Link second node with the third node</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
 
 <span class="k">assert</span> <span class="nb">id</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">third_node</span><span class="p">)</span>
 <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">llist</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span><span class="p">,</span> <span class="n">Node</span><span class="p">)</span> <span class="o">==</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">third_node</span><span class="p">,</span> <span class="n">Node</span><span class="p">)</span>
@@ -686,7 +746,186 @@ None
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node(curr_node_value=1, next_node=Node(curr_node_value=2, next_node=Node(curr_node_value=3, next_node=None)))
+</pre></div>
 </div>
+</div>
+</div>
+</section>
+<section id="append-using-head-and-temp-node-pointers">
+<h3>Append using Head and Temp Node Pointers<a class="headerlink" href="#append-using-head-and-temp-node-pointers" title="Permalink to this headline">#</a></h3>
+<p>Adding 3 nodes seems already quite tedious, we basically have to call <code class="docutils literal notranslate"><span class="pre">next_node</span></code>
+twice on top of the <code class="docutils literal notranslate"><span class="pre">head</span></code> to get a linked list of <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">-&gt;</span> <span class="pre">2</span> <span class="pre">-&gt;</span> <span class="pre">3</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">second</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">third</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ll</span> <span class="o">=</span> <span class="n">SinglyLinkedList</span><span class="p">()</span>
+<span class="n">ll</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">first</span>
+<span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">second</span>
+<span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">third</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node(curr_node_value=1, next_node=Node(curr_node_value=2, next_node=Node(curr_node_value=3, next_node=None)))
+</pre></div>
+</div>
+</div>
+</div>
+<section id="confusion-of-temp-pointer">
+<h4>Confusion of Temp Pointer<a class="headerlink" href="#confusion-of-temp-pointer" title="Permalink to this headline">#</a></h4>
+<p>We show how we can use a <code class="docutils literal notranslate"><span class="pre">temp</span></code> node that initially points to <code class="docutils literal notranslate"><span class="pre">head</span></code>, and how after traversing,
+the <code class="docutils literal notranslate"><span class="pre">head</span></code> will get updated with the desired node.</p>
+<p>Let’s define a linked list with <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">-&gt;</span> <span class="pre">2</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code> and we add 3 to it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">second</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">third</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">ll</span> <span class="o">=</span> <span class="n">SinglyLinkedList</span><span class="p">()</span>
+<span class="n">ll</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">first</span>
+<span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">second</span>
+
+<span class="n">temp_node</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">head</span>  <span class="c1"># ll.head and temp has 1 -&gt; 2 -&gt; None</span>
+
+<span class="c1"># if we want to add 3, we can do</span>
+<span class="c1"># ll.head.next_node.next_node = third</span>
+<span class="c1"># or we can do it on temp.</span>
+
+<span class="n">temp_node</span> <span class="o">=</span> <span class="n">temp_node</span><span class="o">.</span><span class="n">next_node</span>  <span class="c1"># temp_node is now 2 -&gt; None and is ll.head.next_node</span>
+<span class="n">temp_node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">third</span>  <span class="c1"># this is equivalent to ll.head.next_node.next_node = third</span>
+<span class="k">assert</span> <span class="n">temp_node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">==</span> <span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span> <span class="c1"># so this is equals to ll.head.next_node.next_node = third</span>
+<span class="c1"># print(id(ll.head), id(temp_node), id(ll.head.next_node)) will indicate that they are the same.</span>
+
+<span class="c1"># Note we just traverse once since our end goal is for temp_node to be the last node.</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;head          :    </span><span class="si">{</span><span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="si">}</span><span class="s2">, </span><span class="se">\n</span><span class="s2">temp_node     :    </span><span class="si">{</span><span class="n">temp_node</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="p">),</span> <span class="nb">id</span><span class="p">(</span><span class="n">temp_node</span><span class="p">),</span> <span class="nb">id</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>head          :    Node(curr_node_value=1, next_node=Node(curr_node_value=2, next_node=Node(curr_node_value=3, next_node=None))), 
+temp_node     :    Node(curr_node_value=2, next_node=Node(curr_node_value=3, next_node=None))
+140581873829200 140581873829104 140581873829104
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s define a linked list with <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">-&gt;</span> <span class="pre">2</span> <span class="pre">-&gt;</span> <span class="pre">3</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code> and we add 4 to it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">second</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">third</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">fourth</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">ll</span> <span class="o">=</span> <span class="n">SinglyLinkedList</span><span class="p">()</span>
+<span class="n">ll</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">first</span>
+<span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">second</span>
+<span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">third</span>
+
+<span class="n">temp_node</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">head</span> <span class="c1"># temp has 1 -&gt; 2 -&gt; 3 -&gt; None</span>
+
+<span class="c1"># add 4, we just traverse twice to reach the end</span>
+
+<span class="n">temp_node</span> <span class="o">=</span> <span class="n">temp_node</span><span class="o">.</span><span class="n">next_node</span> <span class="c1"># ll.head.next_node</span>
+<span class="n">temp_node</span> <span class="o">=</span> <span class="n">temp_node</span><span class="o">.</span><span class="n">next_node</span> <span class="c1"># ll.head.next_node.next_node</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">temp_node</span><span class="p">)</span>
+
+<span class="n">temp_node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">fourth</span> <span class="c1"># ll.head.next_node.next_node.next_node = fourth!</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;head          :    </span><span class="si">{</span><span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="si">}</span><span class="s2">, </span><span class="se">\n</span><span class="s2">temp_node     :    </span><span class="si">{</span><span class="n">temp_node</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="p">),</span> <span class="nb">id</span><span class="p">(</span><span class="n">temp_node</span><span class="p">),</span> <span class="nb">id</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next_node</span><span class="o">.</span><span class="n">next_node</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node(curr_node_value=3, next_node=None)
+head          :    Node(curr_node_value=1, next_node=Node(curr_node_value=2, next_node=Node(curr_node_value=3, next_node=Node(curr_node_value=4, next_node=None)))), 
+temp_node     :    Node(curr_node_value=3, next_node=Node(curr_node_value=4, next_node=None))
+140581873829968 140581873830112 140581873830112
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note we traversed twice now since we need to two steps for <code class="docutils literal notranslate"><span class="pre">temp_node</span></code> to reach <code class="docutils literal notranslate"><span class="pre">Node(curr_node_value=3,</span> <span class="pre">next_node=None)</span></code>.</p>
+<p>One important thing to realize is that assigning attribute to <code class="docutils literal notranslate"><span class="pre">temp_node</span></code> will change <code class="docutils literal notranslate"><span class="pre">head</span></code> too.</p>
+</section>
+<section id="append">
+<h4>Append<a class="headerlink" href="#append" title="Permalink to this headline">#</a></h4>
+<p>We first write an <code class="docutils literal notranslate"><span class="pre">append</span></code> method, which adds individual nodes to a linked list’s head, eventually, we
+can create another method called <code class="docutils literal notranslate"><span class="pre">add_multiple_nodes</span></code> which can call <code class="docutils literal notranslate"><span class="pre">append</span></code> multiple times.</p>
+<p>We package our logic above into an <code class="docutils literal notranslate"><span class="pre">append</span></code> method below.</p>
+<p>The key here is we keep track a <code class="docutils literal notranslate"><span class="pre">temp_node</span></code> that points to <code class="docutils literal notranslate"><span class="pre">head</span></code>, and traverse
+<code class="docutils literal notranslate"><span class="pre">temp_node</span></code> all the way to the last node.</p>
+<p>Lastly, we assign <code class="docutils literal notranslate"><span class="pre">temp_node.next_node</span> <span class="pre">=</span> <span class="pre">new_node</span></code> so that our <code class="docutils literal notranslate"><span class="pre">head</span></code> is updated.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SinglyLinkedList</span><span class="p">:</span>
+    <span class="n">head</span><span class="p">:</span> <span class="n">Node</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="kc">None</span>
+        
+    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_value</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">new_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">node_value</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">new_node</span>
+            <span class="k">return</span>
+
+        <span class="c1"># the head defines the whole linked list 1-&gt;2-&gt;3-&gt;None</span>
+        <span class="n">temp_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span>  <span class="c1"># temp_node is now pointing to the first node Node(1)</span>
+        <span class="k">while</span> <span class="n">temp_node</span><span class="o">.</span><span class="n">next_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">temp_node</span><span class="p">)</span>
+            <span class="n">temp_node</span> <span class="o">=</span> <span class="n">temp_node</span><span class="o">.</span><span class="n">next_node</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">temp_node</span><span class="p">)</span>
+
+        <span class="n">temp_node</span><span class="o">.</span><span class="n">next_node</span> <span class="o">=</span> <span class="n">new_node</span>
+        
+    <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="ow">is</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">second</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">third</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">fourth</span>  <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">ll</span> <span class="o">=</span> <span class="n">SinglyLinkedList</span><span class="p">()</span>
+<span class="n">ll</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">first</span>
+<span class="n">ll</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">second</span><span class="p">)</span>
+<span class="n">ll</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">third</span><span class="p">)</span>
+<span class="n">ll</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fourth</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node(curr_node_value=1, next_node=Node(curr_node_value=2, next_node=None))
+Node(curr_node_value=2, next_node=None)
+Node(curr_node_value=1, next_node=Node(curr_node_value=2, next_node=Node(curr_node_value=3, next_node=None)))
+Node(curr_node_value=2, next_node=Node(curr_node_value=3, next_node=None))
+Node(curr_node_value=2, next_node=Node(curr_node_value=3, next_node=None))
+Node(curr_node_value=3, next_node=None)
+Node(curr_node_value=1, next_node=Node(curr_node_value=2, next_node=Node(curr_node_value=3, next_node=Node(curr_node_value=4, next_node=None))))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="traversing-a-linked-list">
 <h3>Traversing a Linked List<a class="headerlink" href="#traversing-a-linked-list" title="Permalink to this headline">#</a></h3>

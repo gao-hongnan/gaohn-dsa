@@ -594,6 +594,18 @@ False
 <p><a class="reference external" href="https://leetcode.com/problems/valid-parentheses/solution/">Leetcode’s solution</a> is quite good, so we will
 gladly reference to it.</p>
 <p>It’s algorithm is as follows:</p>
+<div class="proof algorithm admonition" id="valid-parentheses-using-stack">
+<p class="admonition-title"><span class="caption-number">Algorithm 1 </span> (Valid Parentheses Using Stack)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>Inputs</strong>: Given a string containing just the characters ‘(’, ‘)’, ‘{’, ‘}’, ‘[’ and ‘]’</p>
+<p><strong>Output</strong>: Return true if the input string is valid, otherwise return false.</p>
+<p><strong>Validity</strong>: An input string is valid if:</p>
+<ul class="simple">
+<li><p>Open brackets must be closed by the same type of brackets.</p></li>
+<li><p>Open brackets must be closed in the correct order.</p></li>
+<li><p>Every close bracket has a corresponding open bracket of the same type.</p></li>
+</ul>
+<p><strong>Algorithm</strong>:</p>
 <ul class="simple">
 <li><p>Initialize an empty stack <code class="docutils literal notranslate"><span class="pre">s</span></code>.</p></li>
 <li><p>Initialize a <code class="docutils literal notranslate"><span class="pre">mapping</span></code> that maps the closed bracket to its open counterpart: <code class="docutils literal notranslate"><span class="pre">mapping</span> <span class="pre">=</span> <span class="pre">{&quot;)&quot;:</span> <span class="pre">&quot;(&quot;,</span> <span class="pre">&quot;}&quot;:</span> <span class="pre">&quot;{&quot;,</span> <span class="pre">&quot;]&quot;:</span> <span class="pre">&quot;[&quot;}</span></code></p></li>
@@ -608,7 +620,8 @@ We will keep pushing the open bracket until we encounter the first close bracket
 </li>
 <li><p>In the end, if we are left with a stack still having elements, then this implies an invalid expression, else it is valid.</p></li>
 </ul>
-<div class="cell docutils container">
+</section>
+</div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
