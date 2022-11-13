@@ -15,4 +15,10 @@ parts:
   - caption: Linked List
     chapters:
       - file: linked_list/LinkedList.ipynb
+  - caption: Recursion
+    chapters:
+      - file: recursion/Recursion.ipynb
+  - caption: Searching Algorithms
+    chapters:
+      - file: searching_algorithms/SequentialSearch.ipynb
 
