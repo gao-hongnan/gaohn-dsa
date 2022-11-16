@@ -21,4 +21,7 @@ parts:
   - caption: Searching Algorithms
     chapters:
       - file: searching_algorithms/SequentialSearch.ipynb
-
+      - file: searching_algorithms/BinarySearch.ipynb
+  - caption: References
+    chapters:
+    - file: bibliography/bibliography.md
