@@ -57,6 +57,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Binary Search" href="BinarySearch.html" />
     <link rel="prev" title="Recursion" href="../recursion/Recursion.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -199,6 +200,23 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Sequential/Linear Search
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BinarySearch.html">
+   Binary Search
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bibliography/bibliography.html">
+   Bibliography
   </a>
  </li>
 </ul>
@@ -655,7 +673,9 @@ title="Print to PDF"
 <span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">sequential_search</span><span class="p">(</span><span class="n">container</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="k">def</span> <span class="nf">unordered_sequential_search_iterative</span><span class="p">(</span>
+    <span class="n">container</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="n">T</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;If the target element is found in the container, returns True and its index,</span>
 <span class="sd">    else, return False and -1 to indicate the not found index.&quot;&quot;&quot;</span>
     <span class="n">is_found</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># a flag to indicate so your return is more meaningful</span>
@@ -673,13 +693,16 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unordered_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sequential_search</span><span class="p">(</span><span class="n">unordered_list</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sequential_search</span><span class="p">(</span><span class="n">unordered_list</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">unordered_sequential_search_iterative</span><span class="p">(</span><span class="n">unordered_list</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># smaller than smallest element</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">unordered_sequential_search_iterative</span><span class="p">(</span><span class="n">unordered_list</span><span class="p">,</span> <span class="mi">45</span><span class="p">))</span> <span class="c1"># larger than largest element</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">unordered_sequential_search_iterative</span><span class="p">(</span><span class="n">unordered_list</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span> <span class="c1"># in the middle</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(False, -1)
+(False, -1)
 (True, 7)
 </pre></div>
 </div>
@@ -712,9 +735,9 @@ because we need to check every element in the list.</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Element is in the list</p></td>
-<td><p><span class="math notranslate nohighlight">\(\O(1)\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(\O(\frac{n}{2})\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\O(\frac{n}{2})\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\O(1)\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>Element is not in the list</p></td>
 <td><p><span class="math notranslate nohighlight">\(\O(n)\)</span></p></td>
@@ -737,7 +760,9 @@ we will not count the size of the list, and thus the space complexity is <span c
 <h3>Implementation (Recursive)<a class="headerlink" href="#implementation-recursive" title="Permalink to this headline">#</a></h3>
 <div class="cell tag_number-source-lines docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">container</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">unordered_sequential_search_recursive</span><span class="p">(</span>
+    <span class="n">container</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Recursive implementation of unordered Sequential Search.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">container</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># if not container is also fine</span>
         <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># not found</span>
@@ -746,7 +771,9 @@ we will not count the size of the list, and thus the space complexity is <span c
         <span class="k">return</span> <span class="n">index</span>  <span class="c1"># found</span>
 
     <span class="c1"># notice we increment index by 1 to mean index += 1 in the iterative case</span>
-    <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">target</span><span class="p">,</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># recursive case</span>
+    <span class="k">return</span> <span class="n">unordered_sequential_search_recursive</span><span class="p">(</span>
+        <span class="n">container</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">target</span><span class="p">,</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="p">)</span>  <span class="c1"># recursive case</span>
 </pre></div>
 </div>
 </div>
@@ -754,33 +781,36 @@ we will not count the size of the list, and thus the space complexity is <span c
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unordered_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">unordered_list</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">unordered_list</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">unordered_sequential_search_recursive</span><span class="p">(</span><span class="n">unordered_list</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># smaller than smallest element</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">unordered_sequential_search_recursive</span><span class="p">(</span><span class="n">unordered_list</span><span class="p">,</span> <span class="mi">45</span><span class="p">))</span> <span class="c1"># larger than largest element</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">unordered_sequential_search_recursive</span><span class="p">(</span><span class="n">unordered_list</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span> <span class="c1"># in the middle</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1
+-1
 7
 </pre></div>
 </div>
 </div>
 </div>
 <p>Let’s see if our implementation obeys the 3 Laws of Recursion (<a class="reference internal" href="../recursion/Recursion.html#axiom_three_laws_of_recursion">Axiom 1</a>).</p>
-<p>We need to shrink our <code class="docutils literal notranslate"><span class="pre">container</span></code> list from <span class="math notranslate nohighlight">\(n\)</span> all the way down, and at the same,
+<p>We need to shrink our <code class="docutils literal notranslate"><span class="pre">container</span></code> list from <span class="math notranslate nohighlight">\(n\)</span> all the way down, and at the same time,
 keep track of our <code class="docutils literal notranslate"><span class="pre">index</span></code> to point to the correct index of the <code class="docutils literal notranslate"><span class="pre">container</span></code>.</p>
 <ol class="simple">
 <li><p>We have two base cases:</p>
 <ul class="simple">
-<li><p>in <code class="docutils literal notranslate"><span class="pre">lines</span> <span class="pre">3-4</span></code>, we first check if the list is empty, if it is, means we reached till the end
+<li><p>in <code class="docutils literal notranslate"><span class="pre">lines</span> <span class="pre">5-6</span></code>, we first check if the list is empty, if it is, means we reached till the end
 of the list and have not found the <code class="docutils literal notranslate"><span class="pre">target</span></code> element, and hence return <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p></li>
-<li><p>in <code class="docutils literal notranslate"><span class="pre">lines</span> <span class="pre">6-7</span></code>, if the list’s first element is the <code class="docutils literal notranslate"><span class="pre">target</span></code>, then return the <code class="docutils literal notranslate"><span class="pre">index</span></code> since we found it.</p></li>
+<li><p>in <code class="docutils literal notranslate"><span class="pre">lines</span> <span class="pre">8-9</span></code>, if the list’s first element is the <code class="docutils literal notranslate"><span class="pre">target</span></code>, then return the <code class="docutils literal notranslate"><span class="pre">index</span></code> since we found it.</p></li>
 </ul>
 </li>
-<li><p>Has our recursive algorithm change its state and move towards our base case? Yes, because after each function call,
-we slice our list by <code class="docutils literal notranslate"><span class="pre">[1:]</span></code>, which means we drop the first element, and move on to check if the “next” element is our <code class="docutils literal notranslate"><span class="pre">target</span></code>.
+<li><p>Has our recursive algorithm change its state and move towards our base case? Yes, because after each function call
+at <code class="docutils literal notranslate"><span class="pre">lines</span> <span class="pre">12-14</span></code>, we slice our list by <code class="docutils literal notranslate"><span class="pre">[1:]</span></code>, which means we drop the first element, and move on to check if the “next” element is our <code class="docutils literal notranslate"><span class="pre">target</span></code>.
 Here, we also need to increment <code class="docutils literal notranslate"><span class="pre">index</span></code> by 1 since we need to recover the index if we found the <code class="docutils literal notranslate"><span class="pre">target</span></code>.</p></li>
-<li><p>This is a recursive algorithm because the function calls itself.</p></li>
+<li><p>This is a recursive algorithm because the function calls itself at <code class="docutils literal notranslate"><span class="pre">lines</span> <span class="pre">12-14</span></code>.</p></li>
 </ol>
 <div class="tip admonition">
 <p class="admonition-title">Tip</p>
@@ -819,9 +849,9 @@ such that <span class="math notranslate nohighlight">\(L_0 \leq L_1 \leq ... \le
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ordered_sequential_search</span><span class="p">(</span><span class="n">container</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Sequential search for ordered container.&quot;&quot;&quot;</span>
     <span class="n">is_found</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># a flag to indicate so your return is more meaningful</span>
     <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
-
     <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">container</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">item</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
             <span class="n">is_found</span> <span class="o">=</span> <span class="kc">True</span>
@@ -829,6 +859,8 @@ such that <span class="math notranslate nohighlight">\(L_0 \leq L_1 \leq ... \le
         <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="n">item</span> <span class="o">&gt;</span> <span class="n">target</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">is_found</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="c1"># do not forget this if not if target &gt; largest element in container, this case is not covered</span>
+    <span class="k">return</span> <span class="n">is_found</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -839,9 +871,9 @@ usage of in-built functions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ordered_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">42</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">ordered_sequential_search</span><span class="p">(</span><span class="n">ordered_list</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">ordered_sequential_search</span><span class="p">(</span><span class="n">ordered_list</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">ordered_sequential_search</span><span class="p">(</span><span class="n">ordered_list</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ordered_sequential_search</span><span class="p">(</span><span class="n">ordered_list</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># smaller than smallest element</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ordered_sequential_search</span><span class="p">(</span><span class="n">ordered_list</span><span class="p">,</span> <span class="mi">45</span><span class="p">))</span> <span class="c1"># larger than largest element</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ordered_sequential_search</span><span class="p">(</span><span class="n">ordered_list</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span> <span class="c1"># in the middle</span>
 </pre></div>
 </div>
 </div>
@@ -879,14 +911,14 @@ and if the first element is already greater than the element we are searching fo
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Element is in the list</p></td>
-<td><p><span class="math notranslate nohighlight">\(\O(1)\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(\O(\frac{n}{2})\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\O(\frac{n}{2})\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\O(1)\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>Element is not in the list</p></td>
-<td><p><span class="math notranslate nohighlight">\(\O(1)\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(\O(\frac{n}{2})\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\O(\frac{n}{2})\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\O(1)\)</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -942,6 +974,13 @@ and if the first element is already greater than the element we are searching fo
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Recursion</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="BinarySearch.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Binary Search</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
